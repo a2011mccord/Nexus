@@ -1,7 +1,6 @@
 const router = require('express').Router();
+import { restoreUser } from '../../utils/auth';
 
-router.post('/test', function(req, res) {
-  res.json({ requestBody: req.body });
-})
+router.use(restoreUser);
 
 module.exports = router;
