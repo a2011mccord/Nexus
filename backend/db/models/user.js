@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Contact, {
         foreignKey: 'user_id'
       })
+      this.hasMany(models.Project, {
+        foreignKey: 'rep_id'
+      })
     }
   }
 
