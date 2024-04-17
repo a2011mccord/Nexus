@@ -55,6 +55,24 @@ module.exports = {
         stage: 'Invoiced',
         value: 4000,
         closeDate: Date.UTC(2024, 4, 11)
+      },
+      {
+        name: 'Project 6',
+        teamId: 1,
+        repId: 2,
+        contactId: 4,
+        stage: 'Prospect',
+        value: 14000,
+        closeDate: Date.UTC(2024, 7, 1)
+      },
+      {
+        name: 'Project 7',
+        teamId: 1,
+        repId: 3,
+        contactId: 5,
+        stage: 'Approved',
+        value: 7000,
+        closeDate: Date.UTC(2024, 5, 25)
       }
     ], { validate: true })
   },
