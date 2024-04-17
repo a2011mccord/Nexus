@@ -12,48 +12,48 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await Contact.bulkCreate([
       {
-        user_id: 1,
-        team_id: 1,
-        first_name: 'Bob',
-        last_name: 'Smith',
+        userId: 1,
+        teamId: 1,
+        firstName: 'Bob',
+        lastName: 'Smith',
         email: 'bob.smith@gmail.com',
-        phone_number: '123-456-7890',
+        phoneNumber: '123-456-7890',
         type: 'Lead'
       },
       {
-        user_id: 1,
-        team_id: 1,
-        first_name: 'Jane',
-        last_name: 'Doe',
+        userId: 1,
+        teamId: 1,
+        firstName: 'Jane',
+        lastName: 'Doe',
         email: 'jane.doe@gmail.com',
-        phone_number: '234-567-8901',
+        phoneNumber: '234-567-8901',
         type: 'Customer'
       },
       {
-        user_id: 1,
-        team_id: 1,
-        first_name: 'John',
-        last_name: 'Johnson',
+        userId: 1,
+        teamId: 1,
+        firstName: 'John',
+        lastName: 'Johnson',
         email: 'john.johnson@gmail.com',
-        phone_number: '987-654-3210',
+        phoneNumber: '987-654-3210',
         type: 'Partner'
       },
       {
-        user_id: 2,
-        team_id: 1,
-        first_name: 'Fake',
-        last_name: 'Contact1',
+        userId: 2,
+        teamId: 1,
+        firstName: 'Fake',
+        lastName: 'Contact1',
         email: 'fake.contact1@gmail.com',
-        phone_number: '111-111-1111',
+        phoneNumber: '111-111-1111',
         type: 'Lead'
       },
       {
-        user_id: 3,
-        team_id: 1,
-        first_name: 'Fake',
-        last_name: 'Contact2',
+        userId: 3,
+        teamId: 1,
+        firstName: 'Fake',
+        lastName: 'Contact2',
         email: 'fake.contact2@gmail.com',
-        phone_number: '222-222-2222',
+        phoneNumber: '222-222-2222',
         type: 'Lead'
       }
     ], { validate: true })

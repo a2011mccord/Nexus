@@ -22,15 +22,15 @@ module.exports = {
         allowNull: false,
         unique: true
       },
-      team_id: {
+      teamId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      rep_id: {
+      repId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      contact_id: {
+      contactId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
@@ -41,7 +41,7 @@ module.exports = {
       value: {
         type: Sequelize.INTEGER
       },
-      close_date: {
+      closeDate: {
         type: Sequelize.DATEONLY
       },
       createdAt: {

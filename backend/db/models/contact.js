@@ -6,30 +6,30 @@ module.exports = (sequelize, DataTypes) => {
   class Contact extends Model {
     static associate(models) {
       this.belongsTo(models.User, {
-        foreignKey: 'user_id'
+        foreignKey: 'userId'
       })
       this.hasMany(models.Project, {
-        foreignKey: 'contact_id'
+        foreignKey: 'contactId'
       })
     }
   }
   Contact.init({
-    user_id: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    team_id: {
+    teamId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    first_name: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [3, 30]
       }
     },
-    last_name: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true
       }
     },
-    phone_number: {
+    phoneNumber: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -60,9 +60,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Contact',defaultScope: {
+    modelName: 'Contact',
+    defaultScope: {
       attributes: {
-        exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt']
+        exclude: ['createdAt', 'updatedAt']
       }
     }
   });

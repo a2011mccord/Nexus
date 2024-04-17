@@ -17,19 +17,19 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      team_id: {
+      teamId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      first_name: {
+      firstName: {
         type: Sequelize.STRING(30),
         allowNull: false
       },
-      last_name: {
+      lastName: {
         type: Sequelize.STRING(30),
         allowNull: false
       },
@@ -38,7 +38,7 @@ module.exports = {
         allowNull: false,
         unique: true
       },
-      phone_number: {
+      phoneNumber: {
         type: Sequelize.STRING(12),
         allowNull: false,
         unique: true

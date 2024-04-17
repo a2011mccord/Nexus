@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/current', requireAuth, async (req, res, next) => {
   const { user } = req;
   const contacts = await Contact.findAll({
-    where: { user_id: user.id }
+    where: { userId: user.id }
   })
 
   let contactsList = []
@@ -36,7 +36,10 @@ router.get('/:contactId', async (req, res, next) => {
         ]
       },
       {
-        model: Project
+        model: Project,
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        }
       }
     ]
   });
@@ -63,5 +66,19 @@ router.get('/', async (req, res, next) => {
     'Contacts': contactsList
   });
 });
+
+router.post('/', requireAuth, async (req, res, next) => {
+  const { user } = req;
+  const contactInfo = req.body;
+  contactInfo.userId = user.id;
+
+  // Temporary to satisfy db constraint until Teams are implemented
+  contactInfo.teamId = 1;
+
+  const newContact = await Contact.create(contactInfo);
+
+  res.status(201);
+  res.json(newContact);
+})
 
 module.exports = router;

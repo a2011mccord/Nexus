@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   class Project extends Model {
     static associate(models) {
       this.belongsTo(models.User, {
-        foreignKey: 'rep_id',
+        foreignKey: 'repId',
         as: 'Rep'
       })
       this.belongsTo(models.Contact, {
-        foreignKey: 'contact_id'
+        foreignKey: 'contactId'
       })
     }
   }
@@ -23,15 +23,15 @@ module.exports = (sequelize, DataTypes) => {
         len: [3, 30]
       }
     },
-    team_id: {
+    teamId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    rep_id: {
+    repId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    contact_id: {
+    contactId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     value: {
       type: DataTypes.INTEGER,
     },
-    close_date: {
+    closeDate: {
       type: DataTypes.DATEONLY
     }
   }, {

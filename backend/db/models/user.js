@@ -6,10 +6,10 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       this.hasMany(models.Contact, {
-        foreignKey: 'user_id'
+        foreignKey: 'userId'
       })
       this.hasMany(models.Project, {
-        foreignKey: 'rep_id'
+        foreignKey: 'repId'
       })
     }
   }
@@ -63,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
     defaultScope: {
       attributes: {
-        exclude: ['createdAt', 'updatedAt']
+        exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt']
       }
     }
   });
