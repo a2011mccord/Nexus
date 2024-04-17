@@ -37,6 +37,24 @@ module.exports = {
         email: 'john.johnson@gmail.com',
         phone_number: '987-654-3210',
         type: 'Partner'
+      },
+      {
+        user_id: 2,
+        team_id: 1,
+        first_name: 'Fake',
+        last_name: 'Contact1',
+        email: 'fake.contact1@gmail.com',
+        phone_number: '111-111-1111',
+        type: 'Lead'
+      },
+      {
+        user_id: 3,
+        team_id: 1,
+        first_name: 'Fake',
+        last_name: 'Contact2',
+        email: 'fake.contact2@gmail.com',
+        phone_number: '222-222-2222',
+        type: 'Lead'
       }
     ], { validate: true })
   },
@@ -48,7 +66,9 @@ module.exports = {
       email: { [Op.in]: [
         'bob.smith@gmail.com',
         'jane.doe@gmail.com',
-        'john.johnson@gmail.com'
+        'john.johnson@gmail.com',
+        'fake.contact1@gmail.com',
+        'fake.contact2@gmail.com'
       ] }
     }, {});
   }

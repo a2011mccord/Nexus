@@ -60,7 +60,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Contact',
+    modelName: 'Contact',defaultScope: {
+      attributes: {
+        exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt']
+      }
+    }
   });
   return Contact;
 };

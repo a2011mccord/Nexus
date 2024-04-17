@@ -3,6 +3,11 @@
 
 const { Project } = require('../models')
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     await Project.bulkCreate([
@@ -55,11 +60,15 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    options.tableName = 'Contacts';
+    options.tableName = 'Projects';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      email: { [Op.in]: [
-
+      name: { [Op.in]: [
+        'Project 1',
+        'Project 2',
+        'Project 3',
+        'Project 4',
+        'Project 5'
       ] }
     }, {});
   }
