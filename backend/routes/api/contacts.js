@@ -1,6 +1,7 @@
 const express = require('express');
 
 const { requireAuth, authorize } = require('../../utils/auth');
+const { contactExists } = require('../../utils/checkExists');
 const { Contact, User, Project } = require('../../db/models');
 
 const router = express.Router();
@@ -21,7 +22,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
   });
 });
 
-router.get('/:contactId', async (req, res, next) => {
+router.get('/:contactId', contactExists, async (req, res, next) => {
   const contactId = req.params.contactId;
   let contact = await Contact.findByPk(contactId, {
     include: [
@@ -44,12 +45,7 @@ router.get('/:contactId', async (req, res, next) => {
     ]
   });
 
-  if (contact) {
-    contact = contact.toJSON();
-  } else {
-    res.status(404);
-    return res.json({ 'message': "Contact couldn't be found"})
-  };
+  contact = contact.toJSON();
 
   res.json(contact)
 });
@@ -79,6 +75,30 @@ router.post('/', requireAuth, async (req, res, next) => {
 
   res.status(201);
   res.json(newContact);
-})
+});
+
+router.put('/:contactId', contactExists, requireAuth, authorize, async (req, res, next) => {
+  const contact = await Contact.findByPk(req.params.contactId);
+  const newContactInfo = req.body;
+
+  await contact.update({
+    firstName: newContactInfo.firstName,
+    lastName: newContactInfo.lastName,
+    email: newContactInfo.email,
+    phoneNumber: newContactInfo.phoneNumber,
+    type: newContactInfo.type
+  });
+
+  await contact.save();
+  res.json(contact);
+});
+
+router.delete('/:contactId', contactExists, requireAuth, authorize, async (req, res, next) => {
+  const contact = await Contact.findByPk(req.params.contactId);
+
+  contact.destroy();
+
+  res.json({ 'message': 'Contact successfully deleted'});
+});
 
 module.exports = router;

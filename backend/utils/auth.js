@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
-const { User } = require('../db/models');
+const { User, Contact } = require('../db/models');
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -70,4 +70,25 @@ const requireAuth = function (req, _res, next) {
   return next(err);
 };
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+const authorize = async (req, res, next) => {
+  const { contactId } = req.params;
+  const userId = req.user.id;
+  let permission = false;
+
+  const contact = await Contact.findByPk(contactId);
+
+  if (contactId && userId === contact.userId) {
+    permission = true;
+  };
+
+  if (permission) return next();
+  else {
+    const err = new Error('Forbidden');
+    err.title = 'Authorization required';
+    err.errors = { message: 'Authorization required' };
+    err.status = 403;
+    return next(err);
+  };
+};
+
+module.exports = { setTokenCookie, restoreUser, requireAuth, authorize };
