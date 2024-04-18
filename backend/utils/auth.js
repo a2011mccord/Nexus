@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
-const { User, Contact } = require('../db/models');
+const { User, Contact, Project } = require('../db/models');
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -71,13 +71,16 @@ const requireAuth = function (req, _res, next) {
 };
 
 const authorize = async (req, res, next) => {
-  const { contactId } = req.params;
+  const { contactId, projectId } = req.params;
   const userId = req.user.id;
   let permission = false;
 
   const contact = await Contact.findByPk(contactId);
+  const project = await Project.findByPk(projectId);
 
   if (contactId && userId === contact.userId) {
+    permission = true;
+  } else if (projectId && userId === project.repId) {
     permission = true;
   };
 

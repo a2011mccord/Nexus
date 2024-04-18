@@ -51,4 +51,43 @@ router.get('/:projectId', projectExists, async (req, res, next) => {
   res.json(project)
 });
 
+router.post('/', requireAuth, async (req, res, next) => {
+  const { user } = req;
+  const projectInfo = req.body;
+  projectInfo.repId = user.id;
+
+  projectInfo.closeDate = new Date(projectInfo.closeDate)
+
+  // Temporary to satisfy db constraint until Teams are implemented
+  projectInfo.teamId = 1;
+
+  const newProject = await Project.create(projectInfo);
+
+  res.status(201);
+  res.json(newProject);
+});
+
+router.put('/:projectId', projectExists, requireAuth, authorize, async (req, res, next) => {
+  const project = await Project.findByPk(req.params.projectId);
+  const newProjectInfo = req.body;
+
+  await project.update({
+    name: newProjectInfo.name,
+    stage: newProjectInfo.stage,
+    value: newProjectInfo.value,
+    closeDate: new Date(newProjectInfo.closeDate)
+  });
+
+  await project.save();
+  res.json(project);
+});
+
+router.delete('/:projectId', projectExists, requireAuth, authorize, async (req, res, next) => {
+  const project = await Project.findByPk(req.params.projectId);
+
+  project.destroy();
+
+  res.json({ 'message': 'Project successfully deleted'});
+});
+
 module.exports = router;
