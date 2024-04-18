@@ -1,3 +1,18 @@
 .hidden {
   display: none;
 }
+
+.profile-dropdown {
+  position: absolute;
+  right: 10px;
+}
+
+.top-nav, .bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.bottom-nav > div {
+  display: flex;
+}
