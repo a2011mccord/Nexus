@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
 import ContactsPage from "./components/ContactsPage";
+import ProjectsPage from "./components/ProjectsPage";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: '/contacts',
         element: <ContactsPage />
+      },
+      {
+        path: '/projects',
+        element: <ProjectsPage />
       },
     ]
   }
