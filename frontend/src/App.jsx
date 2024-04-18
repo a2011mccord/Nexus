@@ -5,6 +5,7 @@ import * as sessionActions from './store/session';
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
+import ContactsPage from "./components/ContactsPage";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/home',
         element: <HomePage />
+      },
+      {
+        path: '/contacts',
+        element: <ContactsPage />
       },
     ]
   }
