@@ -7,6 +7,10 @@
   right: 10px;
 }
 
+.nav-cont {
+  margin-bottom: 20px;
+}
+
 .top-nav, .bottom-nav {
   display: flex;
   justify-content: space-between;
@@ -15,4 +19,12 @@
 
 .bottom-nav > div {
   display: flex;
+}
+
+.nav-icons > div {
+  margin-right: 25px;
+}
+
+.nav-icons > div:hover {
+  cursor: pointer;
 }

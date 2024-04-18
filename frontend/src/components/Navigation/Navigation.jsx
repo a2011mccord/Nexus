@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
@@ -10,6 +10,7 @@ import { BsRocketTakeoff } from "react-icons/bs";
 import { SlCalender } from "react-icons/sl";
 
 function Navigation({ isLoaded }) {
+  const navigate = useNavigate();
   const sessionUser = useSelector(state => state.session.user);
 
   return (
@@ -21,12 +22,22 @@ function Navigation({ isLoaded }) {
           <div><ProfileButton user={sessionUser} /></div>
         </div>
         <div className='bottom-nav'>
-          <div>
-            <div><FaHome size={'2em'} /></div>
-            <div><IoPersonSharp size={'2em'} /></div>
-            <div><BsRocketTakeoff size={'2em'} /></div>
-            <div><SlCalender size={'2em'} /></div>
-            <div><FaWrench size={'2em'} /></div>
+          <div className='nav-icons'>
+            <div onClick={() => navigate('/home')}>
+              <FaHome size={'2em'} />
+            </div>
+            <div onClick={() => navigate('/contacts')}>
+              <IoPersonSharp size={'2em'} />
+            </div>
+            <div onClick={() => navigate('/projects')}>
+              <BsRocketTakeoff size={'2em'} />
+            </div>
+            <div onClick={() => alert('Feature coming soon...')}>
+              <SlCalender size={'2em'} />
+            </div>
+            <div onClick={() => alert('Feature coming soon...')}>
+              <FaWrench size={'2em'} />
+            </div>
           </div>
           <div>
             <div>Menu</div>
