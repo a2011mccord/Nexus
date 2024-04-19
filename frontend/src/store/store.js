@@ -2,10 +2,12 @@ import { legacy_createStore as createStore, combineReducers, applyMiddleware, co
 import { thunk } from 'redux-thunk';
 import sessionReducer from './session';
 import projectsReducer from './projects';
+import contactsReducer from './contacts';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  projectsState: projectsReducer
+  projectState: projectsReducer,
+  contactState: contactsReducer
 });
 
 let enhancer;

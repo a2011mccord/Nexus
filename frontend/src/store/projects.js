@@ -17,7 +17,7 @@ export const fetchProjects = () => async dispatch => {
   }
 };
 
-const selectedProjects = state => state.projectsState.projects;
+const selectedProjects = state => state.projectState.projects;
 export const selectProjects = createSelector(selectedProjects, projects => Object.values(projects))
 
 const initialState = { projects: {} }
