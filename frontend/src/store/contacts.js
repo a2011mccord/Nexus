@@ -2,10 +2,16 @@ import { csrfFetch } from "./csrf";
 import { createSelector } from 'reselect';
 
 const LOAD_CONTACTS = 'contacts/loadContacts';
+const ADD_CONTACT = 'contacts/addContact';
 
 const loadContacts = contacts => ({
   type: LOAD_CONTACTS,
   contacts
+});
+
+const addContact = contact => ({
+  type: ADD_CONTACT,
+  contact
 });
 
 export const fetchContacts = () => async dispatch => {
@@ -14,6 +20,26 @@ export const fetchContacts = () => async dispatch => {
   if (res.ok) {
     const contacts = await res.json();
     dispatch(loadContacts(contacts));
+  }
+};
+
+export const createContact = contact => async dispatch => {
+  const { firstName, lastName, email, phoneNumber, type } = contact;
+  const res = await csrfFetch('/api/contacts', {
+    method: 'POST',
+    body: JSON.stringify({
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      type
+    })
+  });
+
+  if (res.ok) {
+    const newContact = await res.json();
+    dispatch(addContact(newContact));
+    return newContact;
   }
 };
 
@@ -33,9 +59,16 @@ const contactsReducer = (state = initialState, action) => {
 
       return newState;
     }
+    case ADD_CONTACT: {
+      const newState = { ...state, contacts: { ...state.contacts } };
+
+      newState.contacts[action.contact.id] = action.contact;
+
+      return newState;
+    }
     default:
       return state;
   }
-}
+};
 
 export default contactsReducer;

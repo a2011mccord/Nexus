@@ -2,11 +2,14 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchContacts, selectContacts } from '../../store/contacts';
 import { fetchProjects, selectProjects } from '../../store/projects';
+import { useModal } from '../../context/Modal';
+import CreateContactModal from './CreateContactModal';
 import './ContactsPage.css';
 import { FaSquarePlus } from "react-icons/fa6";
 
 function ContactsPage() {
   const dispatch = useDispatch();
+  const { setModalContent } = useModal();
   const contacts = useSelector(selectContacts);
   const projects = useSelector(selectProjects);
 
@@ -14,6 +17,8 @@ function ContactsPage() {
     dispatch(fetchContacts());
     dispatch(fetchProjects());
   }, [dispatch])
+
+  const createContact = () => setModalContent(<CreateContactModal />);
 
   return (
     <div className='contacts-cont'>
@@ -43,7 +48,9 @@ function ContactsPage() {
         </tbody>
       </table>
       <div>
-        <FaSquarePlus size={'2.5em'}/>
+        <div className='add-contact'>
+          <FaSquarePlus size={'2.5em'} onClick={createContact}/>
+        </div>
         <div></div>
       </div>
     </div>
