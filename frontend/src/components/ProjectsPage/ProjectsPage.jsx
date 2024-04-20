@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects, selectProjects } from '../../store/projects';
+import { fetchContacts, selectContacts } from '../../store/contacts';
 import { useModal } from '../../context/Modal';
 import CreateProjectModal from './CreateProjectModal';
 import EditProjectModal from './EditProjectModal';
@@ -13,14 +14,22 @@ function ProjectsPage() {
   const dispatch = useDispatch();
   const { setModalContent } = useModal();
   const projects = useSelector(selectProjects);
+  const contacts = useSelector(selectContacts);
 
   useEffect(() => {
     dispatch(fetchProjects());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
-  const createProject = () => setModalContent(<CreateProjectModal />);
-  const editProject = project => setModalContent(<EditProjectModal project={project} />);
-  const deleteProject = project => setModalContent(<DeleteProjectModal projectId={project.id} />);
+  const createProject = () => setModalContent(
+    <CreateProjectModal contacts={contacts} />
+  );
+  const editProject = project => setModalContent(
+    <EditProjectModal project={project} contacts={contacts} />
+  );
+  const deleteProject = project => setModalContent(
+    <DeleteProjectModal projectId={project.id} />
+  );
 
   return (
     <div className='project-cont'>
@@ -43,7 +52,7 @@ function ProjectsPage() {
               <th scope='row'>{project.name}</th>
               <td>{project.stage}</td>
               <td>Rep {project.repId}</td>
-              <td>{project.Contact.firstName} {project.Contact.lastName}</td>
+              <td>{project.Contact?.firstName} {project.Contact?.lastName}</td>
               <td>{project.value}</td>
               <td>{project.closeDate}</td>
               <td><div>

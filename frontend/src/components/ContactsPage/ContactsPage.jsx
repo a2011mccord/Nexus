@@ -27,7 +27,7 @@ function ContactsPage() {
   const editContact = contact => setModalContent(<EditContactModal contact={contact} />);
   const deleteContact = contact => setModalContent(
     <DeleteContactModal contactId={contact.id} refresh={() => navigate('/contacts')} />
-    );
+  );
 
   return (
     <div className='contacts-cont'>

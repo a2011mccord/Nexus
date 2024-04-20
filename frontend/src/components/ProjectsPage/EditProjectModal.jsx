@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { editProject } from '../../store/projects';
+import { editProject, fetchProjects } from '../../store/projects';
 
-function EditProjectModal({ project }) {
+function EditProjectModal({ project, contacts }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
+  const currentContact = contacts.find(contact => contact.id === project.contactId)
   const [name, setName] = useState(project.name);
   const [stage, setStage] = useState(project.stage);
+  const [contact, setContact] = useState(
+    `${currentContact.firstName} ${currentContact.lastName} - ${currentContact.email}`
+  );
   const [contactId, setContactId] = useState(project.contactId);
   const [value, setValue] = useState(project.value);
   const [closeDate, setCloseDate] = useState(project.closeDate);
@@ -20,13 +24,14 @@ function EditProjectModal({ project }) {
     const editedProject = {
       name,
       stage,
-      ownerId: project.ownerId,
+      repId: project.repId,
       contactId,
       value,
       closeDate
     };
 
     return dispatch(editProject(project.id, editedProject)).then(() => {
+      dispatch(fetchProjects());
       closeModal();
     });
   };
@@ -45,46 +50,60 @@ function EditProjectModal({ project }) {
           />
         </label>
         {errors.name && <p>{errors.name}</p>}
-        <label>
-          Stage
-          <input
-            type="text"
-            value={stage}
-            onChange={(e) => setStage(e.target.value)}
-            required
-          />
-        </label>
-        {errors.stage && <p>{errors.stage}</p>}
-        <label>
-          Contact
-          <input
-            type="text"
-            value={contactId}
-            onChange={(e) => setContactId(e.target.value)}
-            required
-          />
-        </label>
-        {errors.contactId && <p>{errors.contactId}</p>}
+
+        <select
+          value={stage}
+          onChange={e => setStage(e.target.value)}
+        >
+          <option value="" disabled>
+            Please select project stage
+          </option>
+          <option value="Lead">Lead</option>
+          <option value="Prospect">Prospect</option>
+          <option value="Approved">Approved</option>
+          <option value="Completed">Completed</option>
+          <option value="Invoiced">Invoiced</option>
+        </select>
+
+        <select
+          value={contact}
+          onChange={e => {
+            setContactId(contacts.find(contact => contact.email === e.target.value.split('-')[1].trim()).id)
+            setContact(e.target.value);
+          }}
+        >
+          <option value="" disabled>
+            Please select a contact
+          </option>
+          {contacts && contacts.map(contact => (
+            <option key={contact.id}>
+              {contact.firstName} {contact.lastName} - {contact.email}
+            </option>
+          ))}
+        </select>
+
         <label>
           Value
           <input
-            type="text"
+            type="number"
             value={value}
             onChange={(e) => setValue(e.target.value)}
             required
           />
         </label>
         {errors.value && <p>{errors.value}</p>}
+
         <label>
           Close Date
           <input
-            type="text"
+            type="date"
             value={closeDate}
             onChange={(e) => setCloseDate(e.target.value)}
             required
           />
         </label>
         {errors.closeDate && <p>{errors.closeDate}</p>}
+
         <button type="submit">Submit</button>
       </form>
     </>
