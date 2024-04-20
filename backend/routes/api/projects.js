@@ -9,7 +9,16 @@ const router = express.Router();
 router.get('/current', requireAuth, async (req, res, next) => {
   const { user } = req;
   const projects = await Project.findAll({
-    where: { repId: user.id }
+    where: { repId: user.id },
+    include: [
+      {
+        model: Contact,
+        attributes: [
+          'firstName',
+          'lastName'
+        ]
+      }
+    ]
   })
 
   let projectsList = []

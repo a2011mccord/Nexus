@@ -2,10 +2,16 @@ import { csrfFetch } from "./csrf";
 import { createSelector } from 'reselect';
 
 const LOAD_PROJECTS = 'projects/loadProjects';
+const ADD_PROJECT = 'projects/addProject';
 
 const loadProjects = projects => ({
   type: LOAD_PROJECTS,
   projects
+});
+
+const addProject = project => ({
+  type: ADD_PROJECT,
+  project
 });
 
 export const fetchProjects = () => async dispatch => {
@@ -14,6 +20,19 @@ export const fetchProjects = () => async dispatch => {
   if (res.ok) {
     const projects = await res.json();
     dispatch(loadProjects(projects));
+  }
+};
+
+export const createProject = project => async dispatch => {
+  const res = await csrfFetch('/api/projects', {
+    method: 'POST',
+    body: JSON.stringify(project)
+  });
+
+  if (res.ok) {
+    const newProject = await res.json();
+    dispatch(addProject(newProject));
+    return newProject;
   }
 };
 
@@ -30,6 +49,13 @@ const projectsReducer = (state = initialState, action) => {
       action.projects.Projects.forEach(project => {
         newState.projects[project.id] = project;
       });
+
+      return newState;
+    }
+    case ADD_PROJECT: {
+      const newState = { ...state, projects: { ...state.projects } };
+
+      newState.projects[action.project.id] = action.project;
 
       return newState;
     }

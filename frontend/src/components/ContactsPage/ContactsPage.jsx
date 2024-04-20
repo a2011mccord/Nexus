@@ -21,7 +21,7 @@ function ContactsPage() {
   useEffect(() => {
     dispatch(fetchContacts());
     dispatch(fetchProjects());
-  }, [dispatch])
+  }, [dispatch]);
 
   const createContact = () => setModalContent(<CreateContactModal />);
   const editContact = contact => setModalContent(<EditContactModal contact={contact} />);
