@@ -1,15 +1,21 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects, selectProjects } from '../../store/projects';
+import { useModal } from '../../context/Modal';
+import CreateProjectModal from './CreateProjectModal';
 import './ProjectsPage.css';
+import { FaSquarePlus } from 'react-icons/fa6';
 
 function ProjectsPage() {
   const dispatch = useDispatch();
+  const { setModalContent } = useModal();
   const projects = useSelector(selectProjects);
 
   useEffect(() => {
     dispatch(fetchProjects());
   }, [dispatch]);
+
+  const createProject = () => setModalContent(<CreateProjectModal />);
 
   return (
     <div className='project-cont'>
@@ -38,6 +44,10 @@ function ProjectsPage() {
           ))}
         </tbody>
       </table>
+      <div>
+        <FaSquarePlus size={'2.5em'} className='fa-plus' onClick={createProject} />
+        <div></div>
+      </div>
     </div>
   );
 }

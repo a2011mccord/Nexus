@@ -73,7 +73,7 @@ function CreateContactModal() {
             required
           />
         </label>
-        {errors.phoneNumber && <p>{errors.lastName}</p>}
+        {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
         <label>
           Type
           <input
