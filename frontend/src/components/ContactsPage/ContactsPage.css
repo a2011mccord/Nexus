@@ -1,3 +1,5 @@
-.add-contact:hover {
+.fa-plus:hover,
+.fa-edit:hover,
+.fa-trash:hover {
   cursor: pointer;
 }

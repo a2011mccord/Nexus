@@ -1,15 +1,20 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { fetchContacts, selectContacts } from '../../store/contacts';
 import { fetchProjects, selectProjects } from '../../store/projects';
 import { useModal } from '../../context/Modal';
 import CreateContactModal from './CreateContactModal';
+import EditContactModal from './EditContactModal';
+import DeleteContactModal from './DeleteContactModal';
 import './ContactsPage.css';
 import { FaSquarePlus } from "react-icons/fa6";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 function ContactsPage() {
   const dispatch = useDispatch();
-  const { setModalContent } = useModal();
+  const navigate = useNavigate();
+  const { setModalContent, setOnModalClose } = useModal();
   const contacts = useSelector(selectContacts);
   const projects = useSelector(selectProjects);
 
@@ -19,6 +24,11 @@ function ContactsPage() {
   }, [dispatch])
 
   const createContact = () => setModalContent(<CreateContactModal />);
+  const editContact = contact => setModalContent(<EditContactModal contact={contact} />);
+  const deleteContact = contact => {
+    setOnModalClose(() => navigate('/contacts'));
+    setModalContent(<DeleteContactModal contactId={contact.id} />);
+  }
 
   return (
     <div className='contacts-cont'>
@@ -31,6 +41,7 @@ function ContactsPage() {
             <th scope="col">Email</th>
             <th scope="col">Phone</th>
             <th scope="col">Projects</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -43,14 +54,18 @@ function ContactsPage() {
               <td>{projects && projects.filter(project => {
                 return project.contactId === contact.id
               }).length}</td>
+              <td><div>
+                <FaEdit size={'1.2em'} className='fa-edit'
+                  onClick={() => editContact(contact)} />
+                <FaTrash size={'1.2em'} className='fa-trash'
+                  onClick={() => deleteContact(contact)} />
+              </div></td>
             </tr>
           ))}
         </tbody>
       </table>
       <div>
-        <div className='add-contact'>
-          <FaSquarePlus size={'2.5em'} onClick={createContact}/>
-        </div>
+        <FaSquarePlus size={'2.5em'} className='fa-plus' onClick={createContact}/>
         <div></div>
       </div>
     </div>
