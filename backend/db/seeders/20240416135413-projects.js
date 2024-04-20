@@ -18,7 +18,7 @@ module.exports = {
         contactId: 1,
         stage: 'Lead',
         value: 10000,
-        closeDate: Date.UTC(2024, 6, 1)
+        closeDate: new Date('2024-6-1').toISOString().split('T')[0]
       },
       {
         name: 'Project 2',
@@ -27,7 +27,7 @@ module.exports = {
         contactId: 2,
         stage: 'Prospect',
         value: 3000,
-        closeDate: Date.UTC(2024, 5, 20)
+        closeDate: new Date('2024-5-20').toISOString().split('T')[0]
       },
       {
         name: 'Project 3',
@@ -36,7 +36,7 @@ module.exports = {
         contactId: 3,
         stage: 'Approved',
         value: 5000,
-        closeDate: Date.UTC(2024, 6, 15)
+        closeDate: new Date('2024-6-15').toISOString().split('T')[0]
       },
       {
         name: 'Project 4',
@@ -45,7 +45,7 @@ module.exports = {
         contactId: 1,
         stage: 'Completed',
         value: 8000,
-        closeDate: Date.UTC(2024, 4, 16)
+        closeDate: new Date('2024-4-20').toISOString().split('T')[0]
       },
       {
         name: 'Project 5',
@@ -54,7 +54,7 @@ module.exports = {
         contactId: 2,
         stage: 'Invoiced',
         value: 4000,
-        closeDate: Date.UTC(2024, 4, 11)
+        closeDate: new Date('2024-4-11').toISOString().split('T')[0]
       },
       {
         name: 'Project 6',
@@ -63,7 +63,7 @@ module.exports = {
         contactId: 4,
         stage: 'Prospect',
         value: 14000,
-        closeDate: Date.UTC(2024, 7, 1)
+        closeDate: new Date('2024-7-1').toISOString().split('T')[0]
       },
       {
         name: 'Project 7',
@@ -72,7 +72,7 @@ module.exports = {
         contactId: 5,
         stage: 'Approved',
         value: 7000,
-        closeDate: Date.UTC(2024, 5, 25)
+        closeDate: new Date('2024-5-25').toISOString().split('T')[0]
       }
     ], { validate: true })
   },

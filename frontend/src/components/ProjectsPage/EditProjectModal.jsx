@@ -27,7 +27,7 @@ function EditProjectModal({ project, contacts }) {
       repId: project.repId,
       contactId,
       value,
-      closeDate
+      closeDate: new Date(closeDate).toISOString().split('T')[0]
     };
 
     return dispatch(editProject(project.id, editedProject)).then(() => {
@@ -97,6 +97,8 @@ function EditProjectModal({ project, contacts }) {
           Close Date
           <input
             type="date"
+            selected={closeDate}
+            min={new Date().toISOString().split('T')[0]}
             value={closeDate}
             onChange={(e) => setCloseDate(e.target.value)}
             required

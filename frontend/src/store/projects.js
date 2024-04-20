@@ -49,7 +49,6 @@ export const createProject = project => async dispatch => {
 };
 
 export const editProject = (projectId, payload) => async dispatch => {
-  console.log(payload)
   const res = await csrfFetch(`/api/projects/${projectId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

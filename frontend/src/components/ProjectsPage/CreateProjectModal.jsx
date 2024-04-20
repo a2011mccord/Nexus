@@ -13,7 +13,7 @@ function CreateProjectModal({ contacts }) {
   const [contact, setContact] = useState('');
   const [contactId, setContactId] = useState();
   const [value, setValue] = useState(0);
-  const [closeDate, setCloseDate] = useState('');
+  const [closeDate, setCloseDate] = useState(new Date().toISOString().split('T')[0]);
   const [errors, setErrors] = useState({});
 
   const handleSubmit = async e => {
@@ -26,7 +26,7 @@ function CreateProjectModal({ contacts }) {
       ownerId: sessionUser.id,
       contactId,
       value,
-      closeDate,
+      closeDate: new Date(closeDate).toISOString().split('T')[0]
     };
 
     await closeModal();
@@ -103,6 +103,7 @@ function CreateProjectModal({ contacts }) {
           Close Date
           <input
             type="date"
+            min={new Date().toISOString().split('T')[0]}
             value={closeDate}
             onChange={(e) => setCloseDate(e.target.value)}
             required
