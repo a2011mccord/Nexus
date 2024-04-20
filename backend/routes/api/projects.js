@@ -1,10 +1,38 @@
 const express = require('express');
-
+const { check } = require('express-validator');
 const { requireAuth, authorize } = require('../../utils/auth');
 const { projectExists } = require('../../utils/checkExists');
+const { handleValidationErrors } = require('../../utils/validation');
 const { Contact, User, Project } = require('../../db/models');
 
 const router = express.Router();
+
+const validateProjectInfo = [
+  check('name')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('Name is required'),
+  check('name')
+    .isLength({ min: 3, max: 30 })
+    .withMessage('Name must be between 3 and 30 characters'),
+  check('teamId')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('TeamId is required'),
+  check('repId')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('RepId is required'),
+  check('contactId')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('ContactId is required'),
+  check('stage')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('Stage is required'),
+  handleValidationErrors
+]
 
 router.get('/current', requireAuth, async (req, res, next) => {
   const { user } = req;
@@ -60,7 +88,7 @@ router.get('/:projectId', projectExists, async (req, res, next) => {
   res.json(project)
 });
 
-router.post('/', requireAuth, async (req, res, next) => {
+router.post('/', requireAuth, validateProjectInfo, async (req, res, next) => {
   const { user } = req;
   const projectInfo = req.body;
   projectInfo.repId = user.id;
@@ -76,7 +104,7 @@ router.post('/', requireAuth, async (req, res, next) => {
   res.json(newProject);
 });
 
-router.put('/:projectId', projectExists, requireAuth, authorize, async (req, res, next) => {
+router.put('/:projectId', projectExists, requireAuth, authorize, validateProjectInfo, async (req, res, next) => {
   const project = await Project.findByPk(req.params.projectId);
   const newProjectInfo = req.body;
 

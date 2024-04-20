@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { createProject } from '../../store/projects';
@@ -15,6 +15,22 @@ function CreateProjectModal({ contacts }) {
   const [value, setValue] = useState(0);
   const [closeDate, setCloseDate] = useState(new Date().toISOString().split('T')[0]);
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const errs = {};
+
+    if (!name) {
+      errs.name = "Project name is required"
+    }
+    if (!stage) {
+      errs.stage = "Project stage is required"
+    }
+    if (!contact) {
+      errs.contact = "Contact is required"
+    }
+
+    setErrors(errs)
+  }, [name, stage, contact])
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -70,6 +86,7 @@ function CreateProjectModal({ contacts }) {
           <option value="Completed">Completed</option>
           <option value="Invoiced">Invoiced</option>
         </select>
+        {errors.stage && <p>{errors.stage}</p>}
 
         <select
           value={contact}
@@ -87,6 +104,7 @@ function CreateProjectModal({ contacts }) {
             </option>
           ))}
         </select>
+        {errors.contact && <p>{errors.contact}</p>}
 
         <label>
           Value
@@ -111,7 +129,7 @@ function CreateProjectModal({ contacts }) {
         </label>
         {errors.closeDate && <p>{errors.closeDate}</p>}
 
-        <button type="submit">Create Project</button>
+        <button type="submit" disabled={Object.values(errors).length}>Create Project</button>
         <button onClick={testProject}>Test Project</button>
       </form>
     </>
