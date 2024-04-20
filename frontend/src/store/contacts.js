@@ -49,7 +49,6 @@ export const createContact = contact => async dispatch => {
 };
 
 export const editContact = (contactId, payload) => async dispatch => {
-  console.log(payload)
   const res = await csrfFetch(`/api/contacts/${contactId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

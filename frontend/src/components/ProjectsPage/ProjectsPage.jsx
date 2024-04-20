@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects, selectProjects } from '../../store/projects';
 import { useModal } from '../../context/Modal';
 import CreateProjectModal from './CreateProjectModal';
+import EditProjectModal from './EditProjectModal';
 import DeleteProjectModal from './DeleteProjectModal';
 import './ProjectsPage.css';
 import { FaSquarePlus } from 'react-icons/fa6';
@@ -18,6 +19,7 @@ function ProjectsPage() {
   }, [dispatch]);
 
   const createProject = () => setModalContent(<CreateProjectModal />);
+  const editProject = project => setModalContent(<EditProjectModal project={project} />);
   const deleteProject = project => setModalContent(<DeleteProjectModal projectId={project.id} />);
 
   return (
@@ -46,7 +48,7 @@ function ProjectsPage() {
               <td>{project.closeDate}</td>
               <td><div>
                 <FaEdit size={'1.2em'} className='fa-edit'
-                   />
+                  onClick={() => editProject(project)} />
                 <FaTrash size={'1.2em'} className='fa-trash'
                   onClick={() => deleteProject(project)} />
               </div></td>

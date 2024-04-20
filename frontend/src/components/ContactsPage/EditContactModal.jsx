@@ -84,7 +84,7 @@ function EditContactModal({ contact }) {
           />
         </label>
         {errors.type && <p>{errors.type}</p>}
-        <button type="submit">Edit Contact</button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );

@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 
 const LOAD_PROJECTS = 'projects/loadProjects';
 const ADD_PROJECT = 'projects/addProject';
+const UPDATE_PROJECT = 'projects/updateProject';
 const REMOVE_PROJECT = 'projects/removeProject';
 
 const loadProjects = projects => ({
@@ -12,6 +13,11 @@ const loadProjects = projects => ({
 
 const addProject = project => ({
   type: ADD_PROJECT,
+  project
+});
+
+const updateProject = project => ({
+  type: UPDATE_PROJECT,
   project
 });
 
@@ -39,6 +45,20 @@ export const createProject = project => async dispatch => {
     const newProject = await res.json();
     dispatch(addProject(newProject));
     return newProject;
+  }
+};
+
+export const editProject = (projectId, payload) => async dispatch => {
+  const res = await csrfFetch(`/api/projects/${projectId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  if (res.ok) {
+    const updatedProject = await res.json();
+    dispatch(updateProject(updatedProject));
+    return updatedProject;
   }
 };
 
@@ -71,6 +91,13 @@ const projectsReducer = (state = initialState, action) => {
       return newState;
     }
     case ADD_PROJECT: {
+      const newState = { ...state, projects: { ...state.projects } };
+
+      newState.projects[action.project.id] = action.project;
+
+      return newState;
+    }
+    case UPDATE_PROJECT: {
       const newState = { ...state, projects: { ...state.projects } };
 
       newState.projects[action.project.id] = action.project;

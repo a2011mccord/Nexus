@@ -1,40 +1,39 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { createProject } from '../../store/projects';
+import { editProject } from '../../store/projects';
 
-function CreateProjectModal() {
+function EditProjectModal({ project }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const sessionUser = useSelector(state => state.session.user)
-  const [name, setName] = useState('');
-  const [stage, setStage] = useState('');
-  const [contactId, setContactId] = useState('');
-  const [value, setValue] = useState(0);
-  const [closeDate, setCloseDate] = useState('');
+  const [name, setName] = useState(project.name);
+  const [stage, setStage] = useState(project.stage);
+  const [contactId, setContactId] = useState(project.contactId);
+  const [value, setValue] = useState(project.value);
+  const [closeDate, setCloseDate] = useState(project.closeDate);
   const [errors, setErrors] = useState({});
 
   const handleSubmit = e => {
     e.preventDefault();
     setErrors({});
 
-    const newProject = {
+    const editedProject = {
       name,
       stage,
-      ownerId: sessionUser.id,
+      ownerId: project.ownerId,
       contactId,
       value,
-      closeDate,
+      closeDate
     };
 
-    return dispatch(createProject(newProject)).then(() => {
+    return dispatch(editProject(project.id, editedProject)).then(() => {
       closeModal();
     });
-  }
+  };
 
   return (
     <>
-      <h1>Create New Project</h1>
+      <h1>Edit Project</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Name
@@ -86,10 +85,10 @@ function CreateProjectModal() {
           />
         </label>
         {errors.closeDate && <p>{errors.closeDate}</p>}
-        <button type="submit">Create Project</button>
+        <button type="submit">Submit</button>
       </form>
     </>
   )
 }
 
-export default CreateProjectModal;
+export default EditProjectModal;
