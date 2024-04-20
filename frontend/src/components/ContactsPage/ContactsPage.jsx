@@ -14,7 +14,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 function ContactsPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { setModalContent, setOnModalClose } = useModal();
+  const { setModalContent } = useModal();
   const contacts = useSelector(selectContacts);
   const projects = useSelector(selectProjects);
 
@@ -25,10 +25,9 @@ function ContactsPage() {
 
   const createContact = () => setModalContent(<CreateContactModal />);
   const editContact = contact => setModalContent(<EditContactModal contact={contact} />);
-  const deleteContact = contact => {
-    setOnModalClose(() => navigate('/contacts'));
-    setModalContent(<DeleteContactModal contactId={contact.id} />);
-  }
+  const deleteContact = contact => setModalContent(
+    <DeleteContactModal contactId={contact.id} refresh={() => navigate('/contacts')} />
+    );
 
   return (
     <div className='contacts-cont'>

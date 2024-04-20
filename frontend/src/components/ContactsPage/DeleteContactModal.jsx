@@ -2,14 +2,14 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { deleteContact } from '../../store/contacts';
 
-function DeleteContactModal({ contactId }) {
+function DeleteContactModal({ contactId, refresh }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
   const handleDelete = e => {
     e.preventDefault();
 
-    dispatch(deleteContact(contactId)).then(closeModal);
+    dispatch(deleteContact(contactId)).then(closeModal).then(refresh);
   };
 
   return (

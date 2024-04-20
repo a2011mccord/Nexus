@@ -30,6 +30,14 @@ function CreateContactModal() {
     });
   };
 
+  const testContact = () => {
+    setFirstName('Test');
+    setLastName('Test');
+    setEmail('test@test.com');
+    setPhoneNumber('888-888-8888');
+    setType('Lead');
+  };
+
   return (
     <>
       <h1>Create New Contact</h1>
@@ -44,6 +52,7 @@ function CreateContactModal() {
           />
         </label>
         {errors.firstName && <p>{errors.firstName}</p>}
+
         <label>
           Last Name
           <input
@@ -54,37 +63,44 @@ function CreateContactModal() {
           />
         </label>
         {errors.lastName && <p>{errors.lastName}</p>}
+
         <label>
           Email
           <input
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
+
         <label>
           Phone Number
           <input
-            type="text"
+            type="tel"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
             required
           />
         </label>
         {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
-        <label>
-          Type
-          <input
-            type="text"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            required
-          />
-        </label>
-        {errors.type && <p>{errors.type}</p>}
+
+        <select
+          value={type}
+          onChange={e => setType(e.target.value)}
+        >
+          <option value="" disabled>
+            Please select contact type
+          </option>
+          <option value="Lead">Lead</option>
+          <option value="Customer">Customer</option>
+          <option value="Partner">Partner</option>
+          <option value="Vendor">Vendor</option>
+        </select>
+
         <button type="submit">Create Contact</button>
+        <button onClick={testContact}>Test Contact</button>
       </form>
     </>
   );
