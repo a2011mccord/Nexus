@@ -73,12 +73,12 @@ export const deleteContact = contactId => async dispatch => {
     dispatch(removeContact(removedContact));
     return removedContact;
   }
-}
+};
 
 const selectedContacts = state => state.contactState.contacts;
 export const selectContacts = createSelector(selectedContacts, contacts => Object.values(contacts));
 
-const initialState = { contacts: {} }
+const initialState = { contacts: {} };
 
 const contactsReducer = (state = initialState, action) => {
   switch (action.type) {

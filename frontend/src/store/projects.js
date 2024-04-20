@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 
 const LOAD_PROJECTS = 'projects/loadProjects';
 const ADD_PROJECT = 'projects/addProject';
+const REMOVE_PROJECT = 'projects/removeProject';
 
 const loadProjects = projects => ({
   type: LOAD_PROJECTS,
@@ -11,6 +12,11 @@ const loadProjects = projects => ({
 
 const addProject = project => ({
   type: ADD_PROJECT,
+  project
+});
+
+const removeProject = project => ({
+  type: REMOVE_PROJECT,
   project
 });
 
@@ -36,10 +42,22 @@ export const createProject = project => async dispatch => {
   }
 };
 
+export const deleteProject = projectId => async dispatch => {
+  const res = await csrfFetch(`/api/projects/${projectId}`, {
+    method: 'DELETE'
+  });
+
+  if (res.ok) {
+    const removedProject = await res.json();
+    dispatch(removeProject(removedProject));
+    return removedProject;
+  }
+};
+
 const selectedProjects = state => state.projectState.projects;
 export const selectProjects = createSelector(selectedProjects, projects => Object.values(projects))
 
-const initialState = { projects: {} }
+const initialState = { projects: {} };
 
 const projectsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -59,9 +77,16 @@ const projectsReducer = (state = initialState, action) => {
 
       return newState;
     }
+    case REMOVE_PROJECT: {
+      const newState = { ...state, projects: { ...state.projects } };
+
+      delete newState.projects[action.project.id];
+
+      return newState;
+    }
     default:
       return state;
   }
-}
+};
 
 export default projectsReducer;
