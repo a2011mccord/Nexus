@@ -10,6 +10,9 @@ function DeleteProjectModal({ projectId }) {
     e.preventDefault();
 
     dispatch(deleteProject(projectId)).then(closeModal);
+
+    // Temporary work around
+    window.location.reload();
   };
 
   return (

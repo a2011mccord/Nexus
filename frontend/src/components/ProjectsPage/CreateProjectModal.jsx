@@ -1,20 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { createProject } from '../../store/projects';
+import { fetchProjects } from '../../store/projects';
 
-function CreateProjectModal() {
+function CreateProjectModal({ contacts }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const sessionUser = useSelector(state => state.session.user)
   const [name, setName] = useState('');
   const [stage, setStage] = useState('');
-  const [contactId, setContactId] = useState('');
+  const [contact, setContact] = useState('');
+  const [contactId, setContactId] = useState();
   const [value, setValue] = useState(0);
-  const [closeDate, setCloseDate] = useState('');
+  const [closeDate, setCloseDate] = useState(new Date().toISOString().split('T')[0]);
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = e => {
+  useEffect(() => {
+    const errs = {};
+
+    if (!name) {
+      errs.name = "Project name is required"
+    }
+    if (!stage) {
+      errs.stage = "Project stage is required"
+    }
+    if (!contact) {
+      errs.contact = "Contact is required"
+    }
+
+    setErrors(errs)
+  }, [name, stage, contact])
+
+  const handleSubmit = async e => {
     e.preventDefault();
     setErrors({});
 
@@ -24,12 +42,20 @@ function CreateProjectModal() {
       ownerId: sessionUser.id,
       contactId,
       value,
-      closeDate,
+      closeDate: new Date(closeDate).toISOString().split('T')[0]
     };
 
-    return dispatch(createProject(newProject)).then(() => {
-      closeModal();
-    });
+    await closeModal();
+    await dispatch(createProject(newProject));
+    await dispatch(fetchProjects());
+  };
+
+  const testProject = () => {
+    setName('Test');
+    setStage('Lead');
+    setContactId(1);
+    setValue(1000);
+    setCloseDate('2024-07-04');
   }
 
   return (
@@ -46,47 +72,65 @@ function CreateProjectModal() {
           />
         </label>
         {errors.name && <p>{errors.name}</p>}
-        <label>
-          Stage
-          <input
-            type="text"
-            value={stage}
-            onChange={(e) => setStage(e.target.value)}
-            required
-          />
-        </label>
+
+        <select
+          value={stage}
+          onChange={e => setStage(e.target.value)}
+        >
+          <option value="" disabled>
+            Please select project stage
+          </option>
+          <option value="Lead">Lead</option>
+          <option value="Prospect">Prospect</option>
+          <option value="Approved">Approved</option>
+          <option value="Completed">Completed</option>
+          <option value="Invoiced">Invoiced</option>
+        </select>
         {errors.stage && <p>{errors.stage}</p>}
-        <label>
-          Contact
-          <input
-            type="text"
-            value={contactId}
-            onChange={(e) => setContactId(e.target.value)}
-            required
-          />
-        </label>
-        {errors.contactId && <p>{errors.contactId}</p>}
+
+        <select
+          value={contact}
+          onChange={e => {
+            setContact(e.target.value);
+            setContactId(contacts.find(contact => contact.email === e.target.value.split('-')[1].trim()).id)
+          }}
+        >
+          <option value="" disabled>
+            Please select a contact
+          </option>
+          {contacts && contacts.map(contact => (
+            <option key={contact.id}>
+              {contact.firstName} {contact.lastName} - {contact.email}
+            </option>
+          ))}
+        </select>
+        {errors.contact && <p>{errors.contact}</p>}
+
         <label>
           Value
           <input
-            type="text"
+            type="number"
             value={value}
             onChange={(e) => setValue(e.target.value)}
             required
           />
         </label>
         {errors.value && <p>{errors.value}</p>}
+
         <label>
           Close Date
           <input
-            type="text"
+            type="date"
+            min={new Date().toISOString().split('T')[0]}
             value={closeDate}
             onChange={(e) => setCloseDate(e.target.value)}
             required
           />
         </label>
         {errors.closeDate && <p>{errors.closeDate}</p>}
-        <button type="submit">Create Project</button>
+
+        <button type="submit" disabled={Object.values(errors).length}>Create Project</button>
+        <button onClick={testProject}>Test Project</button>
       </form>
     </>
   )

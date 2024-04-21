@@ -10,6 +10,9 @@ function DeleteContactModal({ contactId, refresh }) {
     e.preventDefault();
 
     dispatch(deleteContact(contactId)).then(closeModal).then(refresh);
+
+    // Temporary work around
+    window.location.reload();
   };
 
   return (
