@@ -93,7 +93,15 @@ router.post('/', requireAuth, validateProjectInfo, async (req, res, next) => {
   const projectInfo = req.body;
   projectInfo.repId = user.id;
 
-  projectInfo.closeDate = new Date(projectInfo.closeDate)
+  const existingProjects = await Project.findAll()
+  existingProjects.forEach(project => {
+    if (project.name === projectInfo.name) {
+      const err = new Error('Project with that name already exists');
+      next(err);
+    };
+  });
+
+  projectInfo.closeDate = new Date(projectInfo.closeDate).toISOString().split('T')[0]
 
   // Temporary to satisfy db constraint until Teams are implemented
   projectInfo.teamId = 1;
@@ -108,12 +116,15 @@ router.put('/:projectId', projectExists, requireAuth, authorize, validateProject
   const project = await Project.findByPk(req.params.projectId);
   const newProjectInfo = req.body;
 
-  await project.update({
-    name: newProjectInfo.name,
-    stage: newProjectInfo.stage,
-    value: newProjectInfo.value,
-    closeDate: new Date(newProjectInfo.closeDate)
+  const existingProjects = await Project.findAll()
+  existingProjects.forEach(project => {
+    if (project.id !== req.params.projectId && project.name === newProjectInfo.name) {
+      const err = new Error('Project with that name already exists');
+      next(err);
+    };
   });
+
+  await project.update(newProjectInfo);
 
   await project.save();
   res.json(project);

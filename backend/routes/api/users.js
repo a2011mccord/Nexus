@@ -53,7 +53,7 @@ router.post(
       if (Object.keys(err.errors).length) {
         next(err);
       };
-    })
+    });
 
     const user = await User.create({ firstName, lastName, email, username, hashedPassword });
 
