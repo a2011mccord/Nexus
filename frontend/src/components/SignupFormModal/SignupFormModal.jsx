@@ -42,6 +42,15 @@ function SignupFormModal() {
     });
   };
 
+  const testUser = () => {
+    setEmail('test.user@user.io');
+    setUsername('TestUser');
+    setFirstName('Test');
+    setLastName('User');
+    setPassword('password');
+    setConfirmPassword('password');
+  };
+
   return (
     <>
       <h1>Sign Up</h1>
@@ -107,6 +116,7 @@ function SignupFormModal() {
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <button type="submit">Sign Up</button>
+        <button onClick={testUser}>Test User</button>
       </form>
     </>
   );
