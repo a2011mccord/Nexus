@@ -29,7 +29,7 @@ function CreateProjectModal({ contacts }) {
       errs.contact = "Contact is required"
     }
 
-    setErrors(errs)
+    setErrors(errs);
   }, [name, stage, contact])
 
   const handleSubmit = async e => {
@@ -39,20 +39,28 @@ function CreateProjectModal({ contacts }) {
     const newProject = {
       name,
       stage,
-      ownerId: sessionUser.id,
+      teamId: 1,
+      repId: sessionUser.id,
       contactId,
       value,
       closeDate: new Date(closeDate).toISOString().split('T')[0]
     };
 
-    await closeModal();
-    await dispatch(createProject(newProject));
-    await dispatch(fetchProjects());
+    return dispatch(createProject(newProject))
+      .then(closeModal)
+      .then(() => dispatch(fetchProjects()))
+      .catch(async res => {
+        const data = await res.json();
+        if (data) {
+          setErrors({ name: data.message });
+        }
+      });
   };
 
   const testProject = () => {
     setName('Test');
     setStage('Lead');
+    setContact('Bob Smith - bob.smith@gmail.com');
     setContactId(1);
     setValue(1000);
     setCloseDate('2024-07-04');

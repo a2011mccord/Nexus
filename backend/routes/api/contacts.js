@@ -128,11 +128,10 @@ router.put('/:contactId', contactExists, requireAuth, authorize, validateContact
   existingContacts.forEach(contact => {
     const err = new Error('Contact already exists')
     err.errors = {};
-
-    if (contact.id !== req.params.contactId && contact.email === contactInfo.email) {
+    if (contact.id !== +req.params.contactId && contact.email === newContactInfo.email) {
       err.errors.email = "Contact with that email already exists";
     };
-    if (contact.id !== req.params.contactId && contact.phoneNumber === contactInfo.phoneNumber) {
+    if (contact.id !== +req.params.contactId && contact.phoneNumber === newContactInfo.phoneNumber) {
       err.errors.phoneNumber = "Contact with that phone number already exists";
     };
 

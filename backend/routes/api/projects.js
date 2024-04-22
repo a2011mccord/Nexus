@@ -118,7 +118,7 @@ router.put('/:projectId', projectExists, requireAuth, authorize, validateProject
 
   const existingProjects = await Project.findAll()
   existingProjects.forEach(project => {
-    if (project.id !== req.params.projectId && project.name === newProjectInfo.name) {
+    if (project.id !== +req.params.projectId && project.name === newProjectInfo.name) {
       const err = new Error('Project with that name already exists');
       next(err);
     };

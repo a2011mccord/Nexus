@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { editContact } from '../../store/contacts';
@@ -13,6 +13,28 @@ function EditContactModal({ contact }) {
   const [type, setType] = useState(contact.type);
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    const errs = {};
+
+    if (!firstName) {
+      errs.firstName = "First name is required"
+    }
+    if (!lastName) {
+      errs.lastName = "Last name is required"
+    }
+    if (!email) {
+      errs.email = "Email address is required"
+    }
+    if (!phoneNumber) {
+      errs.phoneNumber = "Phone number is required"
+    }
+    if (!type) {
+      errs.type = "Contact type is required"
+    }
+
+    setErrors(errs);
+  }, [firstName, lastName, email, phoneNumber, type]);
+
   const handleSubmit = e => {
     e.preventDefault();
     setErrors({});
@@ -25,9 +47,14 @@ function EditContactModal({ contact }) {
       type
     };
 
-    return dispatch(editContact(contact.id, editedContact)).then(() => {
-      closeModal();
-    });
+    return dispatch(editContact(contact.id, editedContact))
+      .then(closeModal)
+      .catch(async res => {
+        const data = await res.json();
+        if (data?.errors) {
+          setErrors(data.errors);
+        }
+      });
   };
 
   return (
@@ -76,7 +103,7 @@ function EditContactModal({ contact }) {
             required
           />
         </label>
-        {errors.phoneNumber && <p>{errors.lastName}</p>}
+        {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
 
         <select
           value={type}

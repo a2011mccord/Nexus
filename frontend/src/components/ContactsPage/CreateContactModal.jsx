@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { createContact } from '../../store/contacts';
@@ -13,6 +13,28 @@ function CreateContactModal() {
   const [type, setType] = useState('');
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    const errs = {};
+
+    if (!firstName) {
+      errs.firstName = "First name is required"
+    }
+    if (!lastName) {
+      errs.lastName = "Last name is required"
+    }
+    if (!email) {
+      errs.email = "Email address is required"
+    }
+    if (!phoneNumber) {
+      errs.phoneNumber = "Phone number is required"
+    }
+    if (!type) {
+      errs.type = "Contact type is required"
+    }
+
+    setErrors(errs);
+  }, [firstName, lastName, email, phoneNumber, type]);
+
   const handleSubmit = e => {
     e.preventDefault();
     setErrors({});
@@ -25,9 +47,14 @@ function CreateContactModal() {
       type
     };
 
-    return dispatch(createContact(newContact)).then(() => {
-      closeModal();
-    });
+    return dispatch(createContact(newContact))
+      .then(closeModal)
+      .catch(async res => {
+        const data = await res.json();
+        if (data?.errors) {
+          setErrors(data.errors);
+        }
+      });
   };
 
   const testContact = () => {

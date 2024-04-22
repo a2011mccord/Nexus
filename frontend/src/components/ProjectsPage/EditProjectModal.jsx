@@ -40,16 +40,22 @@ function EditProjectModal({ project, contacts }) {
     const editedProject = {
       name,
       stage,
+      teamId: 1,
       repId: project.repId,
       contactId,
       value,
       closeDate: new Date(closeDate).toISOString().split('T')[0]
     };
 
-    return dispatch(editProject(project.id, editedProject)).then(() => {
-      dispatch(fetchProjects());
-      closeModal();
-    });
+    return dispatch(editProject(project.id, editedProject))
+      .then(closeModal)
+      .then(() => dispatch(fetchProjects()))
+      .catch(async res => {
+        const data = await res.json();
+        if (data) {
+          setErrors({ name: data.message });
+        }
+      });
   };
 
   return (
