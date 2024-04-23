@@ -62,15 +62,20 @@ function EditProjectModal({ project, contacts }) {
     <div className='form-cont'>
       <h1>Edit Project</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+        <label>
+          Project Name
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </label>
         {errors.name && <p>{errors.name}</p>}
 
+        <label htmlFor="project-stage" className='outside-label'>Project Stage</label>
         <select
+          id='project-stage'
           value={stage}
           onChange={e => setStage(e.target.value)}
         >
@@ -85,7 +90,9 @@ function EditProjectModal({ project, contacts }) {
         </select>
         {errors.stage && <p>{errors.stage}</p>}
 
+        <label htmlFor="project-contact" className='outside-label'>Contact</label>
         <select
+          id='project-contact'
           value={contact}
           onChange={e => {
             setContactId(contacts.find(contact => contact.email === e.target.value.split('-')[1].trim()).id)
@@ -103,21 +110,28 @@ function EditProjectModal({ project, contacts }) {
         </select>
         {errors.contact && <p>{errors.contact}</p>}
 
-        <input
-          type="number"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          required
-        />
+        <label>
+          Project Value
+          <input
+            type="number"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            required
+          />
+        </label>
         {errors.value && <p>{errors.value}</p>}
-        <input
-          type="date"
-          selected={closeDate}
-          min={new Date().toISOString().split('T')[0]}
-          value={closeDate}
-          onChange={(e) => setCloseDate(e.target.value)}
-          required
-        />
+
+        <label>
+          Close Date
+          <input
+            type="date"
+            selected={closeDate}
+            min={new Date().toISOString().split('T')[0]}
+            value={closeDate}
+            onChange={(e) => setCloseDate(e.target.value)}
+            required
+          />
+        </label>
         {errors.closeDate && <p>{errors.closeDate}</p>}
 
         <button type="submit" disabled={Object.values(errors).length}>Submit</button>

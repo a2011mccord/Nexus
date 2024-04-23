@@ -72,6 +72,7 @@ function CreateProjectModal({ contacts }) {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
+          placeholder='Project name'
           value={name}
           onChange={(e) => setName(e.target.value)}
           required

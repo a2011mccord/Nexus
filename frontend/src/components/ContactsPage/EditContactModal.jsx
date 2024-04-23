@@ -105,7 +105,9 @@ function EditContactModal({ contact }) {
         </label>
         {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
 
+        <label htmlFor="contact-type" className='outside-label'>Contact Type</label>
         <select
+          id='contact-type'
           value={type}
           onChange={e => setType(e.target.value)}
         >

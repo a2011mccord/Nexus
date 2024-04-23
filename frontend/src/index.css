@@ -94,6 +94,14 @@ form p {
   flex-direction: column;
 }
 
+.outside-label {
+  margin: 0;
+}
+
+form > button {
+  margin: 15px 0;
+}
+
 form .buttons {
   display: flex;
   justify-content: space-evenly;
