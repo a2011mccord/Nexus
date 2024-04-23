@@ -34,6 +34,11 @@
   justify-content: space-around;
   padding: 25px 0;
   font-size: 2rem;
+  font-weight: bold;
+  & span {
+    font-size: 1.25rem;
+    text-align: center;
+  }
 }
 
 .stage-icons > div {
