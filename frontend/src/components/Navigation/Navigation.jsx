@@ -13,29 +13,46 @@ function Navigation({ isLoaded }) {
   const navigate = useNavigate();
   const sessionUser = useSelector(state => state.session.user);
 
+  const setActive = eleId => {
+    const navIcons = document.getElementsByClassName('nav-icon');
+    const newActive = document.getElementById(eleId);
+
+    Array.prototype.forEach.call(navIcons, icon => icon.classList.remove('active'));
+    newActive.classList.add('active');
+  }
+
   return (
     <>{!sessionUser ? <></> :
       <div className='nav-cont'>
         <div className='top-nav'>
-          <div><NavLink to="/home">Nexus</NavLink></div>
+          <div><NavLink to="/home" className='home-link'>Nexus</NavLink></div>
           <div>{"[Company Name]"}</div>
           <div><ProfileButton user={sessionUser} /></div>
         </div>
         <div className='bottom-nav'>
           <div className='nav-icons'>
-            <div onClick={() => navigate('/home')}>
+            <div id='home-icon' className='nav-icon' onClick={() => {
+              navigate('/home');
+              setActive('home-icon');
+            }}>
               <FaHome size={'2em'} />
             </div>
-            <div onClick={() => navigate('/contacts')}>
+            <div id='contacts-icon' className='nav-icon' onClick={() => {
+              navigate('/contacts');
+              setActive('contacts-icon');
+            }}>
               <IoPersonSharp size={'2em'} />
             </div>
-            <div onClick={() => navigate('/projects')}>
+            <div id='projects-icon' className='nav-icon' onClick={() => {
+              navigate('/projects');
+              setActive('projects-icon');
+            }}>
               <BsRocketTakeoff size={'2em'} />
             </div>
-            <div onClick={() => alert('Feature coming soon...')}>
+            <div className='nav-icon' onClick={() => alert('Feature coming soon...')}>
               <SlCalender size={'2em'} />
             </div>
-            <div onClick={() => alert('Feature coming soon...')}>
+            <div className='nav-icon' onClick={() => alert('Feature coming soon...')}>
               <FaWrench size={'2em'} />
             </div>
           </div>

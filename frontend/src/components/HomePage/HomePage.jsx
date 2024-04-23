@@ -72,7 +72,9 @@ function HomePage() {
       <div className='home-right-panel'>
         <div className='home-activity'>
           <h3>Activity Feed</h3>
-          <p>Coming soon...</p>
+          <div className='activity-feed'>
+            Coming soon...
+          </div>
         </div>
       </div>
     </div>

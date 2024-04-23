@@ -1,3 +1,21 @@
 /* TODO: Add sitewide styles */
 
 * { box-sizing: border-box; }
+
+body {
+  margin: 0;
+}
+
+html {
+  background-color: lightgray;
+}
+
+:root {
+  --main-blue: #5271ff;
+  --secondary-blue: #272595;
+  --project-stage-blue1: #6ce5e8;
+  --project-stage-blue2: #41b8d5;
+  --project-stage-blue3: #2d8bba;
+  --project-stage-blue4: #2f5f98;
+  --project-stage-blue5: #31356e;
+}

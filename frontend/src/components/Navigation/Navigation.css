@@ -9,22 +9,39 @@
 
 .nav-cont {
   margin-bottom: 20px;
+  background: linear-gradient(to right, black, #3533cd);
+  color: white;
+  padding: 10px 20px;
 }
 
 .top-nav, .bottom-nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
+  height: 40px;
+}
+
+.home-link {
+  color: var(--main-blue);
+  font-size: 2rem;
+  font-weight: bolder;
+  text-decoration: none;
 }
 
 .bottom-nav > div {
   display: flex;
 }
 
-.nav-icons > div {
+.nav-icon {
   margin-right: 25px;
 }
 
-.nav-icons > div:hover {
+.nav-icon:hover {
   cursor: pointer;
+  color: var(--main-blue);
+}
+
+.nav-icons > .active {
+  color: var(--main-blue);
 }
