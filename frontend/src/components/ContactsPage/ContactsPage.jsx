@@ -46,7 +46,7 @@ function ContactsPage() {
         <tbody>
           {contacts && contacts.map(contact => (
             <tr key={contact.id}>
-              <th scope='row'>{contact.firstName} {contact.lastName}</th>
+              <td>{contact.firstName} {contact.lastName}</td>
               <td>{contact.type}</td>
               <td>{contact.email}</td>
               <td>{contact.phoneNumber}</td>

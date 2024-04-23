@@ -59,18 +59,15 @@ function EditProjectModal({ project, contacts }) {
   };
 
   return (
-    <>
+    <div className='form-cont'>
       <h1>Edit Project</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
         {errors.name && <p>{errors.name}</p>}
 
         <select
@@ -106,33 +103,26 @@ function EditProjectModal({ project, contacts }) {
         </select>
         {errors.contact && <p>{errors.contact}</p>}
 
-        <label>
-          Value
-          <input
-            type="number"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="number"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          required
+        />
         {errors.value && <p>{errors.value}</p>}
-
-        <label>
-          Close Date
-          <input
-            type="date"
-            selected={closeDate}
-            min={new Date().toISOString().split('T')[0]}
-            value={closeDate}
-            onChange={(e) => setCloseDate(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="date"
+          selected={closeDate}
+          min={new Date().toISOString().split('T')[0]}
+          value={closeDate}
+          onChange={(e) => setCloseDate(e.target.value)}
+          required
+        />
         {errors.closeDate && <p>{errors.closeDate}</p>}
 
         <button type="submit" disabled={Object.values(errors).length}>Submit</button>
       </form>
-    </>
+    </div>
   )
 }
 

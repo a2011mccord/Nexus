@@ -13,9 +13,90 @@ html {
 :root {
   --main-blue: #5271ff;
   --secondary-blue: #272595;
+  --background-blue: #afbeff;
   --project-stage-blue1: #6ce5e8;
   --project-stage-blue2: #41b8d5;
   --project-stage-blue3: #2d8bba;
   --project-stage-blue4: #2f5f98;
   --project-stage-blue5: #31356e;
+}
+
+.fa-plus:hover, .fa-edit:hover, .fa-trash:hover {
+  cursor: pointer;
+}
+
+.fa-plus {
+  color: var(--project-stage-blue4);
+}
+
+/* tables */
+table {
+  border: 2px solid var(--project-stage-blue4);
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+thead {
+  background-color: var(--background-blue);
+}
+
+tr > th:not(:last-child) {
+  border-right: 2px solid var(--project-stage-blue4);
+}
+
+th {
+  border-bottom: 2px solid var(--project-stage-blue4);
+  padding: 10px 0;
+}
+
+tbody {
+  background-color: white;
+}
+
+tr > td:not(:last-child) {
+  border-right: 2px solid lightgray;
+}
+
+td {
+  border-bottom: 2px solid lightgray;
+  text-align: center;
+  padding: 10px 0;
+}
+
+td > div {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* forms */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form > * {
+  margin: 0 0 10px 0;
+  width: 75%;
+}
+
+form p {
+  margin-top: -10px;
+  color: rgb(200, 0, 0);
+}
+
+.form-cont > h1 {
+  text-align: center;
+}
+
+.form-cont label {
+  display: flex;
+  flex-direction: column;
+}
+
+form .buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: 15px 0;
 }

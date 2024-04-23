@@ -67,18 +67,15 @@ function CreateProjectModal({ contacts }) {
   }
 
   return (
-    <>
+    <div className='form-cont'>
       <h1>Create New Project</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
         {errors.name && <p>{errors.name}</p>}
 
         <select
@@ -114,33 +111,29 @@ function CreateProjectModal({ contacts }) {
         </select>
         {errors.contact && <p>{errors.contact}</p>}
 
-        <label>
-          Value
-          <input
-            type="number"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="number"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          required
+        />
         {errors.value && <p>{errors.value}</p>}
 
-        <label>
-          Close Date
-          <input
-            type="date"
-            min={new Date().toISOString().split('T')[0]}
-            value={closeDate}
-            onChange={(e) => setCloseDate(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="date"
+          min={new Date().toISOString().split('T')[0]}
+          value={closeDate}
+          onChange={(e) => setCloseDate(e.target.value)}
+          required
+        />
         {errors.closeDate && <p>{errors.closeDate}</p>}
 
-        <button type="submit" disabled={Object.values(errors).length}>Create Project</button>
-        <button onClick={testProject}>Test Project</button>
+        <div className='buttons'>
+          <button type="submit" disabled={Object.values(errors).length}>Create Project</button>
+          <button onClick={testProject}>Test Project</button>
+        </div>
       </form>
-    </>
+    </div>
   )
 }
 

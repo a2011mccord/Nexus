@@ -58,7 +58,7 @@ function EditContactModal({ contact }) {
   };
 
   return (
-    <>
+    <div className='form-cont'>
       <h1>Edit Contact</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -120,7 +120,7 @@ function EditContactModal({ contact }) {
 
         <button type="submit">Submit</button>
       </form>
-    </>
+    </div>
   );
 }
 

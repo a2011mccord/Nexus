@@ -32,7 +32,7 @@ function ProjectsPage() {
   );
 
   return (
-    <div className='project-cont'>
+    <div className='projects-cont'>
       <h1>Projects Page</h1>
       <table>
         <thead>
@@ -49,7 +49,7 @@ function ProjectsPage() {
         <tbody>
           {projects && projects.map(project => (
             <tr key={project.id}>
-              <th scope='row'>{project.name}</th>
+              <td>{project.name}</td>
               <td>{project.stage}</td>
               <td>Rep {project.repId}</td>
               <td>{project.Contact?.firstName} {project.Contact?.lastName}</td>

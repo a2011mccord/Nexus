@@ -66,51 +66,43 @@ function CreateContactModal() {
   };
 
   return (
-    <>
+    <div className='form-cont'>
       <h1>Create New Contact</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          First Name
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="text"
+          placeholder='First Name'
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          required
+        />
         {errors.firstName && <p>{errors.firstName}</p>}
 
-        <label>
-          Last Name
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="text"
+          placeholder='Last Name'
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          required
+        />
         {errors.lastName && <p>{errors.lastName}</p>}
 
-        <label>
-          Email
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="email"
+          placeholder='Email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
         {errors.email && <p>{errors.email}</p>}
 
-        <label>
-          Phone Number
-          <input
-            type="tel"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="tel"
+          placeholder='Phone Number'
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          required
+        />
         {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
 
         <select
@@ -126,10 +118,12 @@ function CreateContactModal() {
           <option value="Vendor">Vendor</option>
         </select>
 
-        <button type="submit">Create Contact</button>
-        <button onClick={testContact}>Test Contact</button>
+        <div className='buttons'>
+          <button type="submit">Create Contact</button>
+          <button onClick={testContact}>Test Contact</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

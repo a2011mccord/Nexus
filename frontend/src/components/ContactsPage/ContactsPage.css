@@ -1,5 +1,6 @@
-.fa-plus:hover,
-.fa-edit:hover,
-.fa-trash:hover {
-  cursor: pointer;
+.contacts-cont {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
 }
