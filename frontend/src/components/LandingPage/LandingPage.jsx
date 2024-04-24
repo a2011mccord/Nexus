@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from "../OpenModalMenuItem";
 import SignupFormModal from '../SignupFormModal';
 import './LandingPage.css';
@@ -68,7 +69,7 @@ function LandingPage() {
         </form>
       </div>
       <div className='signup'>
-        Don't have an account?
+        Don&apos;t have an account?
         <OpenModalMenuItem
           itemText="Sign Up"
           modalComponent={<SignupFormModal />}
