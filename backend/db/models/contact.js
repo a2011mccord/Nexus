@@ -1,20 +1,27 @@
 'use strict';
-
-const { Model, Validator } = require('sequelize');
-
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Contact extends Model {
     static associate(models) {
-      this.hasMany(models.Contact, {
+      this.belongsTo(models.User, {
         foreignKey: 'userId'
       })
       this.hasMany(models.Project, {
-        foreignKey: 'repId'
+        foreignKey: 'contactId'
       })
     }
   }
-
-  User.init({
+  Contact.init({
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    teamId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -29,19 +36,6 @@ module.exports = (sequelize, DataTypes) => {
         len: [3, 30]
       }
     },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        len: [4, 30],
-        isNotEmail(value) {
-          if (Validator.isEmail(value)) {
-            throw new Error("Cannot be an email.");
-          }
-        }
-      }
-    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -51,21 +45,27 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true
       }
     },
-    hashedPassword: {
-      type: DataTypes.STRING.BINARY,
+    phoneNumber: {
+      type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
-        len: [60, 60]
+        len: [12, 12],
+        is: /\d{3}-\d{3}-\d{4}/g
       }
+    },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Contact',
     defaultScope: {
       attributes: {
-        exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt']
+        exclude: ['createdAt', 'updatedAt']
       }
     }
   });
-  return User;
+  return Contact;
 };

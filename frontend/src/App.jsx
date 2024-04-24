@@ -3,6 +3,10 @@ import { useDispatch } from "react-redux";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import * as sessionActions from './store/session';
 import Navigation from "./components/Navigation";
+import LandingPage from "./components/LandingPage";
+import HomePage from "./components/HomePage";
+import ContactsPage from "./components/ContactsPage";
+import ProjectsPage from "./components/ProjectsPage";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -16,7 +20,7 @@ function Layout() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Navigation />
       {isLoaded && <Outlet />}
     </>
   );
@@ -28,7 +32,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Welcome!</h1>
+        element: <LandingPage />
+      },
+      {
+        path: '/home',
+        element: <HomePage />
+      },
+      {
+        path: '/contacts',
+        element: <ContactsPage />
+      },
+      {
+        path: '/projects',
+        element: <ProjectsPage />
       },
     ]
   }

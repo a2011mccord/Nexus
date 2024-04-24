@@ -1,0 +1,69 @@
+.home-cont {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.home-cont div {
+  display: flex;
+}
+
+.home-cont h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.stage-icons, .activity-feed {
+  background-color: white;
+}
+
+.home-left-panel {
+  flex-direction: column;
+  width: 65%;
+  margin-right: 25px;
+}
+
+.home-projects {
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.stage-icons {
+  display: flex;
+  justify-content: space-around;
+  padding: 25px 0;
+  font-size: 2rem;
+  font-weight: bold;
+  & span {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+}
+
+.stage-icons > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-charts {
+  justify-content: space-around;
+  align-items: center;
+  min-height: 250px;
+}
+
+.home-right-panel {
+  width: 35%;
+}
+
+.home-activity {
+  flex-direction: column;
+  width: 100%;
+}
+
+.activity-feed {
+  height: 100%;
+  justify-content: center;
+  padding: 10px;
+  font-size: 1.5rem;
+}
