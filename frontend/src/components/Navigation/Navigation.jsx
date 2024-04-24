@@ -75,7 +75,10 @@ function Navigation() {
             </div>
             <div className='search-box'>
               <FaSearch />
-              <input type="text" />
+              <input
+                type="text"
+                placeholder='Search...'
+              />
             </div>
           </div>
         </div>

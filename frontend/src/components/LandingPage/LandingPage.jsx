@@ -19,11 +19,11 @@ function LandingPage() {
 
     setErrors({});
     return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
       .catch(
         async res => {
           const data = await res.json();
           if (data?.errors) setErrors(data.errors);
+          console.log(data)
         }
       );
   };
@@ -59,7 +59,7 @@ function LandingPage() {
               required
             />
           </label>
-          {errors.credential && <p>{errors.password}</p>}
+          {errors.password && <p>{errors.password}</p>}
 
           <div className="buttons">
             <button type="submit">Log In</button>
