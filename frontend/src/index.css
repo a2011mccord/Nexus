@@ -85,7 +85,7 @@ form p {
   color: rgb(200, 0, 0);
 }
 
-.form-cont > h1 {
+.form-cont > h1, .form-cont > h2 {
   text-align: center;
 }
 
