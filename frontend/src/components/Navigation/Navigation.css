@@ -1,10 +1,5 @@
-.hidden {
+#hidden {
   display: none;
-}
-
-.profile-dropdown {
-  position: absolute;
-  right: 10px;
 }
 
 .nav-cont {
@@ -22,11 +17,70 @@
   height: 40px;
 }
 
+.top-nav > div {
+  width: 15%;
+}
+
 .home-link {
   color: var(--main-blue);
   font-size: 2rem;
   font-weight: bolder;
   text-decoration: none;
+}
+
+.company-name {
+  text-align: center;
+}
+
+.top-nav-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 15%;
+}
+
+.bell-icon {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+}
+
+.profile-cont {
+  display: flex;
+  align-items: center;
+}
+
+.profile-cont > span {
+  margin-right: 10px;
+}
+
+.gear-icon {
+  cursor: pointer;
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  color: black;
+  border: 2px solid var(--secondary-blue);
+  border-radius: 5%;
+  box-shadow: 0 1px 10px 2px var(--main-blue);
+  padding: 10px;
+}
+
+.settings-dropdown > h4 {
+  margin: 10px 0 0 0;
+}
+
+.settings-dropdown > p {
+  margin: 0 0 15px 0;
 }
 
 .bottom-nav > div {
@@ -44,4 +98,30 @@
 
 .nav-icons > .active {
   color: var(--main-blue);
+}
+
+.bottom-nav-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 15%;
+  height: 100%;
+}
+
+.menu-icon {
+  cursor: pointer;
+  height: 100%;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.search-box > input {
+  background-color: var(--background-blue);
+  margin-left: 5px;
 }

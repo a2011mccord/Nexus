@@ -52,7 +52,7 @@ function SignupFormModal() {
   };
 
   return (
-    <>
+    <div className='form-cont'>
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -65,6 +65,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
+
         <label>
           Username
           <input
@@ -75,6 +76,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.username && <p>{errors.username}</p>}
+
         <label>
           First Name
           <input
@@ -85,6 +87,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.firstName && <p>{errors.firstName}</p>}
+
         <label>
           Last Name
           <input
@@ -95,6 +98,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.lastName && <p>{errors.lastName}</p>}
+
         <label>
           Password
           <input
@@ -105,6 +109,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
+
         <label>
           Confirm Password
           <input
@@ -115,10 +120,13 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
-        <button onClick={testUser}>Test User</button>
+
+        <div className='buttons'>
+          <button type="submit">Sign Up</button>
+          <button onClick={testUser}>Test User</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

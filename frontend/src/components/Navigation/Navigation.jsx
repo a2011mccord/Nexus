@@ -1,15 +1,16 @@
 import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import ProfileButton from './ProfileButton';
+import SettingsDropdown from './SettingsDropdown';
 import './Navigation.css';
 
 //Temporary icon imports
-import { FaHome, FaWrench } from 'react-icons/fa';
+import { FaHome, FaWrench, FaBell, FaSearch } from 'react-icons/fa';
 import { IoPersonSharp } from "react-icons/io5";
 import { BsRocketTakeoff } from "react-icons/bs";
 import { SlCalender } from "react-icons/sl";
+import { IoMenu } from "react-icons/io5";
 
-function Navigation({ isLoaded }) {
+function Navigation() {
   const navigate = useNavigate();
   const sessionUser = useSelector(state => state.session.user);
 
@@ -26,12 +27,23 @@ function Navigation({ isLoaded }) {
       <div className='nav-cont'>
         <div className='top-nav'>
           <div><NavLink to="/home" className='home-link'>Nexus</NavLink></div>
-          <div>{"[Company Name]"}</div>
-          <div><ProfileButton user={sessionUser} /></div>
+
+          <div className='company-name'>{"[Company Name]"}</div>
+
+          <div className='top-nav-right'>
+            <div className='bell-icon' onClick={() => alert('Feature coming soon...')}>
+              <FaBell size={'1.5em'} />
+            </div>
+            <div className='profile-cont'>
+              <span>{sessionUser.username}</span>
+              <SettingsDropdown user={sessionUser} />
+            </div>
+          </div>
         </div>
+
         <div className='bottom-nav'>
           <div className='nav-icons'>
-            <div id='home-icon' className='nav-icon' onClick={() => {
+            <div id='home-icon' className='nav-icon active' onClick={() => {
               navigate('/home');
               setActive('home-icon');
             }}>
@@ -56,9 +68,15 @@ function Navigation({ isLoaded }) {
               <FaWrench size={'2em'} />
             </div>
           </div>
-          <div>
-            <div>Menu</div>
-            <div>Search</div>
+
+          <div className='bottom-nav-right'>
+            <div className='menu-icon' onClick={() => alert('Feature coming soon...')}>
+              <IoMenu size={'2.5em'} />
+            </div>
+            <div className='search-box'>
+              <FaSearch />
+              <input type="text" />
+            </div>
           </div>
         </div>
       </div>
