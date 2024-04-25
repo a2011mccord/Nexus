@@ -43,7 +43,8 @@ function Navigation() {
     <>{!sessionUser ? <></> :
       <div className='nav-cont'>
         <div className='top-nav'>
-          <div><NavLink to="/home" className='home-link'>Nexus</NavLink></div>
+          <div><NavLink to="/home" className='home-link' onClick={() => setActive('home-icon')}>
+            Nexus</NavLink></div>
 
           <div className='company-name'>{"[Company Name]"}</div>
 
