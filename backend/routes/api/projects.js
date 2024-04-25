@@ -40,6 +40,14 @@ router.get('/current', requireAuth, async (req, res, next) => {
     where: { repId: user.id },
     include: [
       {
+        model: User,
+        attributes: [
+          'firstName',
+          'lastName'
+        ],
+        as: 'Rep'
+      },
+      {
         model: Contact,
         attributes: [
           'firstName',

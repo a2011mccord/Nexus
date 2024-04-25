@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import SettingsDropdown from './SettingsDropdown';
@@ -14,13 +15,29 @@ function Navigation() {
   const navigate = useNavigate();
   const sessionUser = useSelector(state => state.session.user);
 
+  useEffect(() => {
+    switch (window.location.pathname) {
+      case '/home':
+        document.getElementById('home-icon')?.classList.add('active');
+        break;
+      case '/contacts':
+        document.getElementById('contacts-icon')?.classList.add('active');
+        break;
+      case '/projects':
+        document.getElementById('projects-icon')?.classList.add('active');
+        break;
+      default:
+        return;
+    }
+  })
+
   const setActive = eleId => {
     const navIcons = document.getElementsByClassName('nav-icon');
     const newActive = document.getElementById(eleId);
 
     Array.prototype.forEach.call(navIcons, icon => icon.classList.remove('active'));
     newActive.classList.add('active');
-  }
+  };
 
   return (
     <>{!sessionUser ? <></> :
@@ -43,7 +60,7 @@ function Navigation() {
 
         <div className='bottom-nav'>
           <div className='nav-icons'>
-            <div id='home-icon' className='nav-icon active' onClick={() => {
+            <div id='home-icon' className='nav-icon' onClick={() => {
               navigate('/home');
               setActive('home-icon');
             }}>

@@ -51,7 +51,7 @@ function ProjectsPage() {
             <tr key={project.id}>
               <td>{project.name}</td>
               <td>{project.stage}</td>
-              <td>Rep {project.repId}</td>
+              <td>{project.Rep.firstName} {project.Rep.lastName}</td>
               <td>{project.Contact?.firstName} {project.Contact?.lastName}</td>
               <td>{project.value}</td>
               <td>{project.closeDate}</td>

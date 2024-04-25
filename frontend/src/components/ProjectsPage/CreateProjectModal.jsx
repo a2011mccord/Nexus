@@ -112,21 +112,28 @@ function CreateProjectModal({ contacts }) {
         </select>
         {errors.contact && <p>{errors.contact}</p>}
 
-        <input
-          type="number"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          required
-        />
+        <label>
+          Project Value
+          <input
+            type="number"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            required
+          />
+        </label>
         {errors.value && <p>{errors.value}</p>}
 
-        <input
-          type="date"
-          min={new Date().toISOString().split('T')[0]}
-          value={closeDate}
-          onChange={(e) => setCloseDate(e.target.value)}
-          required
-        />
+        <label>
+          Close Date
+          <input
+            type="date"
+            selected={closeDate}
+            min={new Date().toISOString().split('T')[0]}
+            value={closeDate}
+            onChange={(e) => setCloseDate(e.target.value)}
+            required
+          />
+        </label>
         {errors.closeDate && <p>{errors.closeDate}</p>}
 
         <div className='buttons'>
