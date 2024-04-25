@@ -10,9 +10,12 @@ function EditProjectModal({ project, contacts }) {
   const [name, setName] = useState(project.name);
   const [stage, setStage] = useState(project.stage);
   const [contact, setContact] = useState(
+    currentContact ?
     `${currentContact.firstName} ${currentContact.lastName} - ${currentContact.email}`
+    : "Bob Smith - bob.smith@gmail.com"
   );
-  const [contactId, setContactId] = useState(project.contactId);
+  const [contactId, setContactId] = useState(
+    currentContact ? project.contactId : 1);
   const [value, setValue] = useState(project.value);
   const [closeDate, setCloseDate] = useState(project.closeDate);
   const [errors, setErrors] = useState({});
