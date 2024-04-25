@@ -16,11 +16,13 @@ function DeleteContactModal({ contactId, refresh }) {
   };
 
   return (
-    <div className='delete-contact-modal'>
+    <div className='delete-modal'>
       <h1>Confirm Delete</h1>
       <p>Are you sure you want to remove this contact from the listings?</p>
-      <button className='delete-button' onClick={handleDelete}>Delete</button>
-      <button className='cancel-button' onClick={closeModal}>Cancel</button>
+      <div className='buttons'>
+        <button className='delete-button' onClick={handleDelete}>Delete</button>
+        <button className='cancel-button' onClick={closeModal}>Cancel</button>
+      </div>
     </div>
   )
 }
