@@ -38,6 +38,7 @@ function SettingsDropdown({ user }) {
     dispatch(sessionActions.logout());
     closeDropdown();
     navigate('/');
+    window.location.reload();
   };
 
   const dropdownId = (show ? '' : 'hidden');
