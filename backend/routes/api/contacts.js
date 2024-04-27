@@ -12,10 +12,16 @@ const validateContactInfo = [
     .exists({ checkFalsy: true })
     .isLength({ min: 3, max: 30 })
     .withMessage('First Name must be between 3 and 30 characters'),
+  check('firstName')
+    .custom(value => !(/\s/g.test(value)))
+    .withMessage('First Name cannot contain spaces'),
   check('lastName')
     .exists({ checkFalsy: true })
     .isLength({ min: 3, max: 30 })
     .withMessage('Last Name must be between 3 and 30 characters'),
+  check('lastName')
+    .custom(value => !(/\s/g.test(value)))
+    .withMessage('Last Name cannot contain spaces'),
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()

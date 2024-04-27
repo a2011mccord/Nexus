@@ -15,6 +15,9 @@ const validateProjectInfo = [
   check('name')
     .isLength({ min: 3, max: 30 })
     .withMessage('Name must be between 3 and 30 characters'),
+  check('name')
+    .custom(value => !(/^\s|\s$|\s+ /g.test(value)))
+    .withMessage('Invalid use of whitespace'),
   check('teamId')
     .exists({ checkFalsy: true })
     .notEmpty()
@@ -31,6 +34,9 @@ const validateProjectInfo = [
     .exists({ checkFalsy: true })
     .notEmpty()
     .withMessage('Stage is required'),
+  check('value')
+    .custom(value => value > 0)
+    .withMessage('Project value must be greater than 0'),
   handleValidationErrors
 ]
 
