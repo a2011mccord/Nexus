@@ -49,7 +49,6 @@ function Navigation() {
         <div className='top-nav'>
           <img
             src={logo}
-            crossOrigin='anonymous'
             alt="Nexus logo"
             className='nexus-logo'
             onClick={() => {

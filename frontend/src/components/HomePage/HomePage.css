@@ -58,7 +58,15 @@
 }
 
 .stage-chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 47.5%;
+}
+
+.stage-chart h4 {
+  margin: 0;
 }
 
 .home-right-panel {

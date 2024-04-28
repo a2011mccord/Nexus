@@ -7,7 +7,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 25vh;
+  background: linear-gradient(
+    to right,
+    black,
+    var(--secondary-blue) 30%,
+    var(--background-blue) 50%,
+    var(--secondary-blue) 70%,
+    black
+  );
+  height: 100vh;
 }
 
 .signup > span {
@@ -15,4 +23,11 @@
   color: blue;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.landing-logo {
+  box-shadow: 0 0 25px 25px rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  margin-bottom: 5vh;
 }

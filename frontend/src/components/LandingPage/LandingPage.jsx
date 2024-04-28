@@ -5,6 +5,7 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from "../OpenModalMenuItem";
 import SignupFormModal from '../SignupFormModal';
 import './LandingPage.css';
+import logo from '../../images/nexus-logo.png';
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -36,7 +37,11 @@ function LandingPage() {
 
   return (
     <div className='landing-cont'>
-      <h1>Welcome to Nexus</h1>
+      <img
+        src={logo}
+        alt="Nexus logo"
+        className='landing-logo'
+      />
       <div className='form-cont'>
         <h2>Log In</h2>
         <form onSubmit={handleSubmit}>

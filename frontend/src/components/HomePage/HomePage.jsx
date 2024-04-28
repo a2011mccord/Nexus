@@ -71,6 +71,9 @@ function HomePage() {
         </div>
         <div className='home-charts'>
           <div className='stage-chart'>
+            <h4>
+              Project Stage %
+            </h4>
             <StageChart projects={projects} />
           </div>
         </div>
