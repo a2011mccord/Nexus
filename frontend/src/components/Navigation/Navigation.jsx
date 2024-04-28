@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import SettingsDropdown from './SettingsDropdown';
+import { useModal } from '../../context/Modal';
+import AboutModal from '../AboutModal';
 import './Navigation.css';
 import logo from '../../images/nexus-logo.png';
 import starBackground from '../../images/s3.webp';
@@ -15,6 +17,7 @@ import { IoMenu } from "react-icons/io5";
 
 function Navigation() {
   const navigate = useNavigate();
+  const { setModalContent } = useModal();
   const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
@@ -40,6 +43,8 @@ function Navigation() {
     Array.prototype.forEach.call(navIcons, icon => icon.classList.remove('active'));
     newActive.classList.add('active');
   };
+
+  const about = () => setModalContent(<AboutModal />);
 
   return (
     <>{!sessionUser ? <></> :
@@ -103,7 +108,7 @@ function Navigation() {
               <IoMenu size={'2.5em'} />
             </div>
             <div className='search-box'>
-
+              <div onClick={about} className="about">About</div>
             </div>
           </div>
         </div>
