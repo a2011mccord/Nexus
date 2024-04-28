@@ -1,0 +1,31 @@
+.about-modal {
+  font-family: "Arial", sans-serif;
+  max-width: 500px;
+  margin: 50px auto;
+}
+
+.about-modal h2 {
+  color: #000000;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-modal p {
+  color: #000000;
+  line-height: 1.5;
+}
+
+.about-modal h4 {
+  color: #000000;
+  margin-top: 30px;
+}
+
+.about-modal a {
+  color: #0077df;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.about-modal a:hover {
+  color: #0077df;
+}

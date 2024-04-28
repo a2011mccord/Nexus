@@ -46,10 +46,27 @@
   flex-direction: column;
 }
 
+.stage-icons img {
+  height: 100px;
+}
+
 .home-charts {
   justify-content: space-around;
   align-items: center;
   min-height: 250px;
+  width: 100%;
+}
+
+.stage-chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 47.5%;
+}
+
+.stage-chart h4 {
+  margin: 0;
 }
 
 .home-right-panel {

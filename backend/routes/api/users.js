@@ -21,10 +21,22 @@ const validateSignup = [
     .not()
     .isEmail()
     .withMessage('Username cannot be an email.'),
+  check('username')
+    .custom(value => !(/\s/g.test(value)))
+    .withMessage('Username cannot contain spaces'),
   check('password')
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
     .withMessage('Password must be 6 characters or more.'),
+  check('password')
+    .custom(value => !(/\s/g.test(value)))
+    .withMessage('Password cannot contain spaces'),
+  check('firstName')
+    .custom(value => !(/\s/g.test(value)))
+    .withMessage('First Name cannot contain spaces'),
+  check('lastName')
+    .custom(value => !(/\s/g.test(value)))
+    .withMessage('Last Name cannot contain spaces'),
   handleValidationErrors
 ];
 

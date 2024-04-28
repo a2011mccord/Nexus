@@ -1,11 +1,15 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SettingsDropdown from './SettingsDropdown';
+import { useModal } from '../../context/Modal';
+import AboutModal from '../AboutModal';
 import './Navigation.css';
+import logo from '../../images/nexus-logo.png';
+import starBackground from '../../images/s3.webp';
 
 //Temporary icon imports
-import { FaHome, FaWrench, FaBell, FaSearch } from 'react-icons/fa';
+import { FaHome, FaWrench, FaBell } from 'react-icons/fa';
 import { IoPersonSharp } from "react-icons/io5";
 import { BsRocketTakeoff } from "react-icons/bs";
 import { SlCalender } from "react-icons/sl";
@@ -13,6 +17,7 @@ import { IoMenu } from "react-icons/io5";
 
 function Navigation() {
   const navigate = useNavigate();
+  const { setModalContent } = useModal();
   const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
@@ -39,12 +44,23 @@ function Navigation() {
     newActive.classList.add('active');
   };
 
+  const about = () => setModalContent(<AboutModal />);
+
   return (
     <>{!sessionUser ? <></> :
       <div className='nav-cont'>
+        <div id='nav-background' style={{ backgroundImage: `url(${starBackground})`}} />
+        <div id='easter-egg' />
         <div className='top-nav'>
-          <div><NavLink to="/home" className='home-link' onClick={() => setActive('home-icon')}>
-            Nexus</NavLink></div>
+          <img
+            src={logo}
+            alt="Nexus logo"
+            className='nexus-logo'
+            onClick={() => {
+              navigate('/home');
+              setActive('home-icon');
+            }}
+          />
 
           <div className='company-name'>{"[Company Name]"}</div>
 
@@ -92,11 +108,7 @@ function Navigation() {
               <IoMenu size={'2.5em'} />
             </div>
             <div className='search-box'>
-              <FaSearch />
-              <input
-                type="text"
-                placeholder='Search...'
-              />
+              <div onClick={about} className="about">About</div>
             </div>
           </div>
         </div>

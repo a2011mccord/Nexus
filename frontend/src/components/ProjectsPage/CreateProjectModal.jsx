@@ -52,7 +52,7 @@ function CreateProjectModal({ contacts }) {
       .catch(async res => {
         const data = await res.json();
         if (data) {
-          setErrors({ name: data.message });
+          setErrors(data.errors);
         }
       });
   };
