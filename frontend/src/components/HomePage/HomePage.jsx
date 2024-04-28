@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { fetchProjects, selectProjects } from '../../store/projects';
+import StageChart from './StageChart';
 import './HomePage.css';
 import lIcon from '../../images/l-icon.png';
 import pIcon from '../../images/p-icon.png';
@@ -69,8 +70,9 @@ function HomePage() {
           </div>
         </div>
         <div className='home-charts'>
-          <div>Bar Chart</div>
-          <div>Donut Chart</div>
+          <div className='stage-chart'>
+            <StageChart projects={projects} />
+          </div>
         </div>
       </div>
 

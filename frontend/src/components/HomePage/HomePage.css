@@ -54,6 +54,11 @@
   justify-content: space-around;
   align-items: center;
   min-height: 250px;
+  width: 100%;
+}
+
+.stage-chart {
+  width: 47.5%;
 }
 
 .home-right-panel {
