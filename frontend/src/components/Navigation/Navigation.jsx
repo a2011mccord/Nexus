@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SettingsDropdown from './SettingsDropdown';
 import './Navigation.css';
 import logo from '../../images/nexus-logo.png';
+import starBackground from '../../images/s3.webp';
 
 //Temporary icon imports
 import { FaHome, FaWrench, FaBell } from 'react-icons/fa';
@@ -43,6 +44,8 @@ function Navigation() {
   return (
     <>{!sessionUser ? <></> :
       <div className='nav-cont'>
+        <div id='nav-background' style={{ backgroundImage: `url(${starBackground})`}} />
+        <div id='easter-egg' />
         <div className='top-nav'>
           <img
             src={logo}

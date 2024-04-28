@@ -46,6 +46,10 @@
   flex-direction: column;
 }
 
+.stage-icons img {
+  height: 100px;
+}
+
 .home-charts {
   justify-content: space-around;
   align-items: center;

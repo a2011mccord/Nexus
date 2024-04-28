@@ -3,6 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { fetchProjects, selectProjects } from '../../store/projects';
 import './HomePage.css';
+import lIcon from '../../images/l-icon.png';
+import pIcon from '../../images/p-icon.png';
+import aIcon from '../../images/a-icon.png';
+import cIcon from '../../images/c-icon.png';
+import iIcon from '../../images/i-icon.png';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -22,7 +27,7 @@ function HomePage() {
           <h3>Projects</h3>
           <div className='stage-icons'>
             <div>
-              L
+              <img src={lIcon} alt="L" />
               <span>
                 {projects && projects.filter(project => {
                   return project.stage === 'Lead'
@@ -30,7 +35,7 @@ function HomePage() {
               </span>
             </div>
             <div>
-              P
+              <img src={pIcon} alt="P" />
               <span>
                 {projects && projects.filter(project => {
                   return project.stage === 'Prospect'
@@ -38,7 +43,7 @@ function HomePage() {
               </span>
             </div>
             <div>
-              A
+              <img src={aIcon} alt="A" />
               <span>
                 {projects && projects.filter(project => {
                   return project.stage === 'Approved'
@@ -46,7 +51,7 @@ function HomePage() {
               </span>
             </div>
             <div>
-              C
+              <img src={cIcon} alt="C" />
               <span>
                 {projects && projects.filter(project => {
                   return project.stage === 'Completed'
@@ -54,7 +59,7 @@ function HomePage() {
               </span>
             </div>
             <div>
-              I
+              <img src={iIcon} alt="I" />
               <span>
                 {projects && projects.filter(project => {
                   return project.stage === 'Invoiced'

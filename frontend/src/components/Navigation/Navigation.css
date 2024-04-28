@@ -9,6 +9,27 @@
   padding: 10px 20px;
 }
 
+.nav-cont div {
+  z-index: 1;
+}
+
+#nav-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 120px;
+  z-index: 0;
+}
+
+#easter-egg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 100%;
+  box-shadow: 0 0 10px 10px white;
+}
+
 .top-nav, .bottom-nav {
   display: flex;
   justify-content: space-between;
