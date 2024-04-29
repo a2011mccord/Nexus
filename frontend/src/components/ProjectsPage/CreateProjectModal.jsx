@@ -77,7 +77,7 @@ function CreateProjectModal({ contacts }) {
           onChange={(e) => setName(e.target.value)}
           required
         />
-        {errors.name && <p>{errors.name}</p>}
+        {errors?.name && <p>{errors?.name}</p>}
 
         <select
           value={stage}
