@@ -49,12 +49,12 @@ function ProjectsPage() {
         <tbody>
           {projects && projects.map(project => (
             <tr key={project.id}>
-              <td>{project.name}</td>
-              <td>{project.stage}</td>
+              <td>{project?.name}</td>
+              <td>{project?.stage}</td>
               <td>{project.Rep?.firstName} {project.Rep?.lastName}</td>
               <td>{project.Contact?.firstName} {project.Contact?.lastName}</td>
-              <td>{project.value}</td>
-              <td>{project.closeDate}</td>
+              <td>{project?.value}</td>
+              <td>{project?.closeDate}</td>
               <td><div>
                 <FaEdit size={'1.2em'} className='fa-edit'
                   onClick={() => editProject(project)} />
