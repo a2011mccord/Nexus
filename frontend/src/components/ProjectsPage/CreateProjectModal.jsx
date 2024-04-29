@@ -92,7 +92,7 @@ function CreateProjectModal({ contacts }) {
           <option value="Completed">Completed</option>
           <option value="Invoiced">Invoiced</option>
         </select>
-        {errors.stage && <p>{errors.stage}</p>}
+        {errors?.stage && <p>{errors.stage}</p>}
 
         <select
           value={contact}
@@ -110,7 +110,7 @@ function CreateProjectModal({ contacts }) {
             </option>
           ))}
         </select>
-        {errors.contact && <p>{errors.contact}</p>}
+        {errors?.contact && <p>{errors.contact}</p>}
 
         <label>
           Project Value
@@ -121,7 +121,7 @@ function CreateProjectModal({ contacts }) {
             required
           />
         </label>
-        {errors.value && <p>{errors.value}</p>}
+        {errors?.value && <p>{errors.value}</p>}
 
         <label>
           Close Date
@@ -134,7 +134,7 @@ function CreateProjectModal({ contacts }) {
             required
           />
         </label>
-        {errors.closeDate && <p>{errors.closeDate}</p>}
+        {errors?.closeDate && <p>{errors.closeDate}</p>}
 
         <div className='buttons'>
           <button type="submit" disabled={Object.values(errors).length}>Create Project</button>
