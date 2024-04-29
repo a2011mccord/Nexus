@@ -137,7 +137,7 @@ function CreateProjectModal({ contacts }) {
         {errors?.closeDate && <p>{errors.closeDate}</p>}
 
         <div className='buttons'>
-          <button type="submit" disabled={Object.values(errors).length}>Create Project</button>
+          <button type="submit" disabled={errors && Object.values(errors).length}>Create Project</button>
           <button onClick={testProject}>Test Project</button>
         </div>
       </form>
