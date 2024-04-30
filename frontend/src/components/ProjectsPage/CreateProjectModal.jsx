@@ -51,6 +51,7 @@ function CreateProjectModal({ contacts }) {
       .then(() => dispatch(fetchProjects()))
       .catch(async res => {
         const data = await res.json();
+        console.log(data)
         if (data) {
           setErrors(data.errors);
         }

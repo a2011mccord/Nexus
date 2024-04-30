@@ -111,6 +111,7 @@ router.post('/', requireAuth, validateProjectInfo, async (req, res, next) => {
   existingProjects.forEach(project => {
     if (project.name === projectInfo.name) {
       const err = new Error('Project with that name already exists');
+      err.errors = { name: 'Project with that name already exists' };
       next(err);
     };
   });
@@ -134,6 +135,7 @@ router.put('/:projectId', projectExists, requireAuth, authorize, validateProject
   existingProjects.forEach(project => {
     if (project.id !== +req.params.projectId && project.name === newProjectInfo.name) {
       const err = new Error('Project with that name already exists');
+      err.errors = { name: 'Project with that name already exists' };
       next(err);
     };
   });
