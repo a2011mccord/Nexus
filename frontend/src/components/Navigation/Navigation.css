@@ -9,7 +9,7 @@
   padding: 10px 20px;
 }
 
-.nav-cont div {
+.nav-cont div, .nexus-logo {
   z-index: 1;
 }
 
@@ -139,7 +139,6 @@
   height: 100%;
 }
 
-.search-box > input {
-  background-color: var(--background-blue);
-  margin-left: 5px;
+.about {
+  cursor: pointer;
 }
