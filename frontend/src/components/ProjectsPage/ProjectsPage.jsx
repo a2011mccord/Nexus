@@ -33,7 +33,7 @@ function ProjectsPage() {
 
   return (
     <div className='projects-cont'>
-      <h1>Projects Page</h1>
+      <h1>Projects</h1>
       <table>
         <thead>
           <tr>

@@ -7,6 +7,8 @@ import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
 import ContactsPage from "./components/ContactsPage";
 import ProjectsPage from "./components/ProjectsPage";
+import ProjectsPipeline from "./components/ProjectsPage/ProjectsPipeline";
+import ProjectsAnalysis from "./components/ProjectsPage/ProjectsAnalysis";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
         path: '/projects',
         element: <ProjectsPage />
       },
+      {
+        path: '/projects/pipeline',
+        element: <ProjectsPipeline />
+      },
+      {
+        path: '/projects/analysis',
+        element: <ProjectsAnalysis />
+      }
     ]
   }
 ]);
