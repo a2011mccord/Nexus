@@ -70,9 +70,54 @@ module.exports = {
         teamId: 1,
         repId: 3,
         contactId: 5,
-        stage: 'Approved',
+        stage: 'Completed',
         value: 7000,
         closeDate: new Date('2024-5-25').toISOString().split('T')[0]
+      },
+      {
+        name: 'Project 8',
+        teamId: 1,
+        repId: 4,
+        contactId: 6,
+        stage: 'Prospect',
+        value: 8000,
+        closeDate: new Date('2024-5-26').toISOString().split('T')[0]
+      },
+      {
+        name: 'Project 9',
+        teamId: 2,
+        repId: 5,
+        contactId: 7,
+        stage: 'Lead',
+        value: 9000,
+        closeDate: new Date('2024-5-27').toISOString().split('T')[0]
+      },
+      {
+        name: 'Project 10',
+        teamId: 2,
+        repId: 6,
+        contactId: 8,
+        stage: 'Prospect',
+        value: 10000,
+        closeDate: new Date('2024-5-28').toISOString().split('T')[0]
+      },
+      {
+        name: 'Project 11',
+        teamId: 2,
+        repId: 7,
+        contactId: 9,
+        stage: 'Approved',
+        value: 11000,
+        closeDate: new Date('2024-5-29').toISOString().split('T')[0]
+      },
+      {
+        name: 'Project 12',
+        teamId: 2,
+        repId: 8,
+        contactId: 10,
+        stage: 'Prospect',
+        value: 12000,
+        closeDate: new Date('2024-5-21').toISOString().split('T')[0]
       }
     ], { validate: true })
   },
@@ -86,7 +131,14 @@ module.exports = {
         'Project 2',
         'Project 3',
         'Project 4',
-        'Project 5'
+        'Project 5',
+        'Project 6',
+        'Project 7',
+        'Project 8',
+        'Project 9',
+        'Project 10',
+        'Project 11',
+        'Project 12'
       ] }
     }, {});
   }
