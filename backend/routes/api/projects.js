@@ -61,9 +61,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
         ]
       }
     ]
-  })
+  });
 
-  let projectsList = []
+  let projectsList = [];
   projects.forEach(project => {
     projectsList.push(project.toJSON());
   });
