@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTeam } from '../../store/teams';
+import { useModal } from '../../context/Modal';
+import { AddMemberModal } from './MemberModals';
 import './TeamPage.css';
 import { FaEllipsisH } from "react-icons/fa";
 
 function TeamPage() {
   const dispatch = useDispatch();
+  const { setModalContent } = useModal();
   const sessionUser = useSelector(state => state.session.user);
   const currentTeam = useSelector(state => state.teamState.team);
 
@@ -25,6 +28,8 @@ function TeamPage() {
     }
   };
 
+  const addMember = () => setModalContent(<AddMemberModal />);
+
   return (
     <div className='team-cont'>
       <h3>Owner</h3>
@@ -35,7 +40,7 @@ function TeamPage() {
       </div>
 
       <h3>Managers</h3>
-      {currentTeam && currentTeam.Managers.map(manager => (
+      {currentTeam.Managers && currentTeam.Managers.map(manager => (
         <div key={manager.id}>
           <p>Name: {manager.firstName} {manager.lastName}</p>
           <p>Username: {manager.username}</p>
@@ -54,7 +59,7 @@ function TeamPage() {
       ))}
 
       <h3>Members</h3>
-      {currentTeam && currentTeam.Members.map(member => (
+      {currentTeam.Members && currentTeam.Members.map(member => (
         <div key={member.id}>
           <p>Name: {member.firstName} {member.lastName}</p>
           <p>Username: {member.username}</p>
@@ -71,7 +76,7 @@ function TeamPage() {
           }
         </div>
       ))}
-      <button>Add a Team Member</button>
+      <button onClick={addMember}>Add a Team Member</button>
     </div>
   )
 }
