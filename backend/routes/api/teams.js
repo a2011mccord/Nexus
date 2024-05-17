@@ -202,7 +202,35 @@ router.post('/members', requireAuth, authTeamOwner, validateNewMember, async (re
 });
 
 router.post('/', requireAuth, checkUserTeamExists, async (req, res, next) => {
+  const { user } = req;
+  const teamInfo = req.body;
+  teamInfo.ownerId = user.id;
 
+  const existingTeams = await Team.findAll();
+  existingTeams.forEach(team => {
+    const err = new Error('Team already exists');
+    err.errors = {};
+
+    if (team.name === teamInfo.name) {
+      err.errors.name = 'Team with that name already exists';
+    };
+
+    if (Object.keys(err.errors).length) {
+      next(err);
+    };
+  });
+
+  const newTeam = await Team.create(teamInfo);
+  const newTeamInfo = {
+    id: newTeam.id,
+    name: newTeam.name,
+    Owner: user,
+    Managers: [],
+    Members: []
+  }
+
+  res.status(201);
+  res.json(newTeamInfo);
 });
 
 router.put('/', requireAuth, async (req, res, next) => {
@@ -214,7 +242,7 @@ router.delete('/members/:memberId', requireAuth, authTeamOwner, async (req, res,
 
   member.destroy();
 
-  res.json({ 'message': 'Member successfully deleted'})
+  res.json({ 'message': 'Member successfully deleted'});
 });
 
 router.delete('/managers/:managerId', requireAuth, authTeamOwner, async (req, res, next) => {
@@ -222,11 +250,16 @@ router.delete('/managers/:managerId', requireAuth, authTeamOwner, async (req, re
 
   manager.destroy();
 
-  res.json({ 'message': 'Manager successfully deleted'})
+  res.json({ 'message': 'Manager successfully deleted'});
 });
 
-router.delete('/', requireAuth, async (req, res, next) => {
+router.delete('/', requireAuth, authTeamOwner, async (req, res, next) => {
+  const { user } = req;
+  const team = await Team.findOne({ where: { ownerId: user.id } });
 
+  team.destroy();
+
+  res.json({ 'message': 'Team successfully deleted'});
 });
 
 module.exports = router;

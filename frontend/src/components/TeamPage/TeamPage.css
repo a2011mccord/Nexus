@@ -20,6 +20,10 @@
   margin: 0 0 10px 0;
 }
 
+.team-cont span {
+  cursor: pointer;
+}
+
 .user-actions-cont {
   position: relative;
 }

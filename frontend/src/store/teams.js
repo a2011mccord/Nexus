@@ -1,12 +1,18 @@
 import { csrfFetch } from './csrf';
 
 const LOAD_TEAM = 'teams/loadTeam';
+const ADD_TEAM = 'teams/addTeam';
 const ADD_TEAM_MEMBER = 'teams/addTeamMember';
 const REMOVE_TEAM_MEMBER = 'teams/removeTeamMember';
 const REMOVE_TEAM_MANAGER = 'teams/removeTeamManager';
 
 const loadTeam = team => ({
   type: LOAD_TEAM,
+  team
+});
+
+const addTeam = team => ({
+  type: ADD_TEAM,
   team
 });
 
@@ -33,6 +39,19 @@ export const fetchTeam = () => async dispatch => {
     dispatch(loadTeam(team));
   }
 };
+
+export const createTeam = team => async dispatch => {
+  const res = await csrfFetch('/api/teams', {
+    method: 'POST',
+    body: JSON.stringify(team)
+  });
+
+  if (res.ok) {
+    const newTeam = await res.json();
+    dispatch(addTeam(newTeam));
+    return newTeam;
+  }
+}
 
 export const createTeamMember = member => async dispatch => {
   const res = await csrfFetch('/api/teams/members', {
@@ -76,6 +95,13 @@ const initialState = { team: {} };
 const teamsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_TEAM: {
+      const newState = { ...state, team: { ...state.team } };
+
+      newState.team = action.team;
+
+      return newState;
+    }
+    case ADD_TEAM: {
       const newState = { ...state, team: { ...state.team } };
 
       newState.team = action.team;

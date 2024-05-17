@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchTeam } from '../../store/teams';
 import { useModal } from '../../context/Modal';
 import OpenModalMenuItem from '../OpenModalMenuItem';
+import { CreateTeamModal } from './TeamModals';
 import { AddMemberModal, DeleteMemberModal } from './MemberModals';
 import './TeamPage.css';
 import { FaEllipsisH } from "react-icons/fa";
@@ -32,6 +33,15 @@ function TeamPage() {
   const addMember = () => setModalContent(<AddMemberModal />);
 
   return (
+    <>{currentTeam && currentTeam.message ?
+    <div className='team-cont'>
+      <h2>{currentTeam.message}</h2>
+      <OpenModalMenuItem
+        modalComponent={<CreateTeamModal />}
+        itemText='Create team?'
+      />
+    </div>
+    :
     <div className='team-cont'>
       <h3>Owner</h3>
       <div>
@@ -41,50 +51,59 @@ function TeamPage() {
       </div>
 
       <h3>Managers</h3>
-      {currentTeam.Managers && currentTeam.Managers.map(manager => (
-        <div key={manager.id}>
-          <p>Name: {manager.firstName} {manager.lastName}</p>
-          <p>Username: {manager.username}</p>
-          <p>Email: {manager.email}</p>
-          {currentTeam && currentTeam.Owner.id === sessionUser.id &&
-            <div className='user-actions-cont'>
-              <div className='user-actions' onClick={() => toggleActions(manager)}>
-                <FaEllipsisH size={'1.2em'} /></div>
-              <div id={`user-${manager.id}`} className='user-actions-dropdown hidden'>
-                <div>Edit</div>
-                <OpenModalMenuItem
-                  modalComponent={<DeleteMemberModal member={manager} role='manager' />}
-                  itemText='Delete'
-                />
+      {currentTeam.Managers && currentTeam.Managers.length ?
+        currentTeam.Managers.map(manager => (
+          <div key={manager.id}>
+            <p>Name: {manager.firstName} {manager.lastName}</p>
+            <p>Username: {manager.username}</p>
+            <p>Email: {manager.email}</p>
+            {currentTeam && currentTeam.Owner.id === sessionUser.id &&
+              <div className='user-actions-cont'>
+                <div className='user-actions' onClick={() => toggleActions(manager)}>
+                  <FaEllipsisH size={'1.2em'} /></div>
+                <div id={`user-${manager.id}`} className='user-actions-dropdown hidden'>
+                  <div>Edit</div>
+                  <OpenModalMenuItem
+                    modalComponent={<DeleteMemberModal member={manager} role='manager' />}
+                    itemText='Delete'
+                  />
+                </div>
               </div>
-            </div>
-          }
-        </div>
-      ))}
+            }
+          </div>
+        ))
+        :
+        <p>Your team currently has no managers.</p>
+      }
 
       <h3>Members</h3>
-      {currentTeam.Members && currentTeam.Members.map(member => (
-        <div key={member.id}>
-          <p>Name: {member.firstName} {member.lastName}</p>
-          <p>Username: {member.username}</p>
-          <p>Email: {member.email}</p>
-          {currentTeam && currentTeam.Owner.id === sessionUser.id &&
-            <div className='user-actions-cont'>
-              <div className='user-actions' onClick={() => toggleActions(member)}>
-                <FaEllipsisH size={'1.2em'} /></div>
-              <div id={`user-${member.id}`} className='user-actions-dropdown hidden'>
-                <div>Edit</div>
-                <OpenModalMenuItem
-                  modalComponent={<DeleteMemberModal member={member} role="member" />}
-                  itemText='Delete'
-                />
+      {currentTeam.Members && currentTeam.Members.length ?
+        currentTeam.Members.map(member => (
+          <div key={member.id}>
+            <p>Name: {member.firstName} {member.lastName}</p>
+            <p>Username: {member.username}</p>
+            <p>Email: {member.email}</p>
+            {currentTeam && currentTeam.Owner.id === sessionUser.id &&
+              <div className='user-actions-cont'>
+                <div className='user-actions' onClick={() => toggleActions(member)}>
+                  <FaEllipsisH size={'1.2em'} /></div>
+                <div id={`user-${member.id}`} className='user-actions-dropdown hidden'>
+                  <div>Edit</div>
+                  <OpenModalMenuItem
+                    modalComponent={<DeleteMemberModal member={member} role="member" />}
+                    itemText='Delete'
+                  />
+                </div>
               </div>
-            </div>
-          }
-        </div>
-      ))}
+            }
+          </div>
+        ))
+        :
+        <p>Your team currently has no members.</p>
+      }
       <button onClick={addMember}>Add a Team Member</button>
     </div>
+    }</>
   )
 }
 
