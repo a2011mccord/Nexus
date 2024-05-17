@@ -165,7 +165,8 @@ router.post('/members', requireAuth, authTeamOwner, validateNewMember, async (re
     team.Members.forEach(member => {
       teamInfo.Members.push(member.User);
     });
-    teamInfo.Members.push(newMember);
+    const newMemberUser = await User.findByPk(newMember.userId);
+    teamInfo.Members.push(newMemberUser);
 
     res.status(201);
     res.json(teamInfo);
@@ -192,7 +193,8 @@ router.post('/members', requireAuth, authTeamOwner, validateNewMember, async (re
     team.Members.forEach(member => {
       teamInfo.Members.push(member.User);
     });
-    teamInfo.Managers.push(newManager);
+    const newManagerUser = await User.findByPk(newManager.userId);
+    teamInfo.Managers.push(newManagerUser);
 
     res.status(201);
     res.json(teamInfo);
@@ -208,7 +210,7 @@ router.put('/', requireAuth, async (req, res, next) => {
 });
 
 router.delete('/members/:memberId', requireAuth, authTeamOwner, async (req, res, next) => {
-  const member = await Member.findByPk(req.params.memberId);
+  const member = await Member.findOne({ where: { userId: req.params.memberId}});
 
   member.destroy();
 
@@ -216,7 +218,7 @@ router.delete('/members/:memberId', requireAuth, authTeamOwner, async (req, res,
 });
 
 router.delete('/managers/:managerId', requireAuth, authTeamOwner, async (req, res, next) => {
-  const manager = await Manager.findByPk(req.params.managerId);
+  const manager = await Manager.findOne({ where: { userId: req.params.managerId}});
 
   manager.destroy();
 

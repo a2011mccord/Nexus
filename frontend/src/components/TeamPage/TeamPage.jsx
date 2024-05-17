@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTeam } from '../../store/teams';
 import { useModal } from '../../context/Modal';
-import { AddMemberModal } from './MemberModals';
+import OpenModalMenuItem from '../OpenModalMenuItem';
+import { AddMemberModal, DeleteMemberModal } from './MemberModals';
 import './TeamPage.css';
 import { FaEllipsisH } from "react-icons/fa";
 
@@ -51,7 +52,10 @@ function TeamPage() {
                 <FaEllipsisH size={'1.2em'} /></div>
               <div id={`user-${manager.id}`} className='user-actions-dropdown hidden'>
                 <div>Edit</div>
-                <div>Delete</div>
+                <OpenModalMenuItem
+                  modalComponent={<DeleteMemberModal member={manager} role='manager' />}
+                  itemText='Delete'
+                />
               </div>
             </div>
           }
@@ -70,7 +74,10 @@ function TeamPage() {
                 <FaEllipsisH size={'1.2em'} /></div>
               <div id={`user-${member.id}`} className='user-actions-dropdown hidden'>
                 <div>Edit</div>
-                <div>Delete</div>
+                <OpenModalMenuItem
+                  modalComponent={<DeleteMemberModal member={member} role="member" />}
+                  itemText='Delete'
+                />
               </div>
             </div>
           }
