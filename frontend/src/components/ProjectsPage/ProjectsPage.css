@@ -164,6 +164,11 @@
   width: 100%;
 }
 
+.pipeline-cards .project-card:hover {
+  cursor: default;
+  background-color: white;
+}
+
 /* Projects Analysis Page */
 
 .projects-analysis-cont {
