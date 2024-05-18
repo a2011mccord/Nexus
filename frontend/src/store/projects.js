@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 import { createSelector } from 'reselect';
 
 const LOAD_PROJECTS = 'projects/loadProjects';
+const LOAD_PROJECT_DETAILS = 'projects/loadProjectDetails';
 const ADD_PROJECT = 'projects/addProject';
 const UPDATE_PROJECT = 'projects/updateProject';
 const REMOVE_PROJECT = 'projects/removeProject';
@@ -9,6 +10,11 @@ const REMOVE_PROJECT = 'projects/removeProject';
 const loadProjects = projects => ({
   type: LOAD_PROJECTS,
   projects
+});
+
+const loadProjectDetails = projectDetails => ({
+  type: LOAD_PROJECT_DETAILS,
+  projectDetails
 });
 
 const addProject = project => ({
@@ -32,6 +38,15 @@ export const fetchProjects = () => async dispatch => {
   if (res.ok) {
     const projects = await res.json();
     dispatch(loadProjects(projects));
+  }
+};
+
+export const fetchProjectDetails = projectId => async dispatch => {
+  const res = await csrfFetch(`/api/projects/${projectId}`);
+
+  if (res.ok) {
+    const projectDetails = await res.json();
+    dispatch(loadProjectDetails(projectDetails));
   }
 };
 
@@ -77,7 +92,7 @@ export const deleteProject = projectId => async dispatch => {
 const selectedProjects = state => state.projectState.projects;
 export const selectProjects = createSelector(selectedProjects, projects => Object.values(projects))
 
-const initialState = { projects: {} };
+const initialState = { projects: {}, projectDetails: {} };
 
 const projectsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -87,6 +102,13 @@ const projectsReducer = (state = initialState, action) => {
       action.projects.Projects.forEach(project => {
         newState.projects[project.id] = project;
       });
+
+      return newState;
+    }
+    case LOAD_PROJECT_DETAILS: {
+      const newState = { ...state, projectDetails: { ...state.projectDetails } };
+
+      newState.projectDetails = action.projectDetails;
 
       return newState;
     }
