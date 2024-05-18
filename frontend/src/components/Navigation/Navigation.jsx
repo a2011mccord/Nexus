@@ -30,6 +30,17 @@ function Navigation() {
         break;
       case '/projects':
         document.getElementById('projects-icon')?.classList.add('active');
+        document.getElementById('all-projects')?.classList.add('active');
+        document.getElementById('pipeline')?.classList.remove('active');
+        document.getElementById('analysis')?.classList.remove('active');
+        break;
+      case '/projects/pipeline':
+        document.getElementById('projects-icon')?.classList.add('active');
+        document.getElementById('pipeline')?.classList.add('active');
+        break;
+      case '/projects/analysis':
+        document.getElementById('projects-icon')?.classList.add('active');
+        document.getElementById('analysis')?.classList.add('active');
         break;
       default:
         return;
@@ -44,15 +55,24 @@ function Navigation() {
     newActive.classList.add('active');
   };
 
+  const setActiveTab = eleId => {
+    const projNavTabs = document.getElementsByClassName('proj-nav-tab');
+    const newActive = document.getElementById(eleId);
+
+    Array.prototype.forEach.call(projNavTabs, tab => tab.classList.remove('active'));
+    newActive.classList.add('active');
+  };
+
   const about = () => setModalContent(<AboutModal />);
 
   return (
-    <>{!sessionUser ? <></> :
+    <>{!sessionUser ? <></> : <>
       <div className='nav-cont'>
         <div id='nav-background' style={{ backgroundImage: `url(${starBackground})`}} />
         <div id='easter-egg' />
+
         <div className='top-nav'>
-          <img
+          <div><img
             src={logo}
             alt="Nexus logo"
             className='nexus-logo'
@@ -60,7 +80,7 @@ function Navigation() {
               navigate('/home');
               setActive('home-icon');
             }}
-          />
+          /></div>
 
           <div className='company-name'>{"[Company Name]"}</div>
 
@@ -112,8 +132,31 @@ function Navigation() {
             </div>
           </div>
         </div>
+
       </div>
-    }</>
+      {!(window.location.pathname.split('/')[1] === 'projects') ? <></> :
+        <div className='projects-nav'>
+          <div id='all-projects' className='proj-nav-tab' onClick={() => {
+            navigate('/projects');
+            setActiveTab('all-projects');
+          }}>
+            All Projects
+          </div>
+          <div id='pipeline' className='proj-nav-tab' onClick={() => {
+            navigate('/projects/pipeline');
+            setActiveTab('pipeline');
+          }}>
+            Pipeline
+          </div>
+          <div id='analysis' className='proj-nav-tab' onClick={() => {
+            navigate('/projects/analysis');
+            setActiveTab('analysis');
+          }}>
+            Analysis
+          </div>
+        </div>
+      }
+    </>}</>
   );
 }
 

@@ -1,6 +1,172 @@
+/* Projects Main Page */
 .projects-cont {
   display: flex;
   flex-direction: column;
   width: 90%;
   margin: 0 auto;
+}
+
+.projects-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.projects-header > .fa-plus {
+  margin-left: 15px;
+}
+
+.panels-cont {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.project-cards-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  background-color: white;
+  border: 2px solid var(--secondary-blue);
+  border-radius: 5px;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  cursor: default;
+}
+
+.project-card:hover {
+  cursor: pointer;
+  background-color: var(--background-blue);
+}
+
+.project-card-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.project-card-info > div {
+  width: 50%;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.project-actions {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+}
+
+.action-icons {
+  cursor: pointer;
+  margin: 5px;
+}
+
+.project-details-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width: 60%;
+  height: 100vh;
+}
+
+.project-details-panel > section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  margin-bottom: 25px;
+}
+
+.rep-details {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-details > div {
+  margin-bottom: 10px;
+}
+
+.project-details {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+/* Projects Pipeline Page */
+
+.pipeline {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 25px auto;
+}
+
+.pipeline-segment {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 110px;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.pipeline > .pipeline-segment:last-child {
+  color: white;
+}
+
+.pipeline-segment > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  height: 110px;
+}
+
+.lead > img {
+  fill: var(--project-stage-blue1);
+}
+
+.pipeline-cards {
+  display: flex;
+  width: 93%;
+  margin: 0 auto;
+}
+
+.pipeline-cards > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Projects Analysis Page */
+
+.projects-analysis-cont {
+  display: flex;
+  justify-content: center;
 }

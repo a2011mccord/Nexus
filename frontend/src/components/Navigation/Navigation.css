@@ -58,7 +58,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 15%;
 }
 
 .bell-icon {
@@ -141,4 +140,29 @@
 
 .about {
   cursor: pointer;
+}
+
+.projects-nav {
+  display: flex;
+  width: 100%;
+}
+
+.projects-nav > div {
+  cursor: pointer;
+  width: 33.33%;
+  text-align: center;
+  background-color: #100f3c;
+  color: white;
+  margin-top: -20px;
+  margin-bottom: 10px;
+  padding: 15px 0;
+  border: solid 1px gray;
+}
+
+.proj-nav-tab:not(:last-child) {
+  border-right: 0;
+}
+
+.proj-nav-tab.active {
+  background-color: var(--secondary-blue);
 }
