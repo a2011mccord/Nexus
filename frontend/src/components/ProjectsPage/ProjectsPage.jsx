@@ -53,8 +53,8 @@ function ProjectsPage() {
             <div key={project.id} className='project-card' onClick={() => setProjectId(project.id)}>
               <h4>{project.name}</h4>
               <div className='project-card-info'>
-                <div>Rep: {project.Rep.firstName} {project.Rep.lastName}</div>
-                <div>Contact: {project.Contact.firstName} {project.Contact.lastName}</div>
+                <div>Rep: {project.Rep?.firstName} {project.Rep?.lastName}</div>
+                <div>Contact: {project.Contact?.firstName} {project.Contact?.lastName}</div>
                 <div>{project.stage}</div>
                 <div>${project.value}</div>
               </div>
