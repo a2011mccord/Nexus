@@ -2,9 +2,9 @@ import './ProjectsPage.css';
 
 function ProjectsAnalysis() {
   return (
-    <>
-      <div>Projects Analysis</div>
-    </>
+    <div className='projects-analysis-cont'>
+      <h1>Project Analysis Coming Soon...</h1>
+    </div>
   )
 }
 

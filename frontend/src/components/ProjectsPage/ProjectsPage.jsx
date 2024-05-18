@@ -16,7 +16,13 @@ function ProjectsPage() {
   const projects = useSelector(selectProjects);
   const contacts = useSelector(selectContacts);
   const projectDetails = useSelector(state => state.projectState.projectDetails)
-  const [projectId, setProjectId] = useState(projects[0]);
+  const initialProjectId = projects[0]?.id
+  useEffect(() => {
+    if (initialProjectId) {
+      setProjectId(initialProjectId);
+    }
+  }, [initialProjectId])
+  const [projectId, setProjectId] = useState(projects[0]?.id);
 
   useEffect(() => {
     dispatch(fetchProjects());
@@ -52,7 +58,6 @@ function ProjectsPage() {
                 <div>{project.stage}</div>
                 <div>${project.value}</div>
               </div>
-
             </div>
           ))}
         </div>
@@ -68,18 +73,18 @@ function ProjectsPage() {
           <section>
             <h4>Representative</h4>
             <div className='rep-details'>
-              <div>{projectDetails.Rep.firstName}</div>
-              <div>{projectDetails.Rep.lastName}</div>
-              <div>{projectDetails.Rep.email}</div>
+              <div>{projectDetails.Rep?.firstName}</div>
+              <div>{projectDetails.Rep?.lastName}</div>
+              <div>{projectDetails.Rep?.email}</div>
             </div>
           </section>
 
           <section>
             <h4>Customer Information</h4>
             <div className='contact-details'>
-              <div>{projectDetails.Contact.firstName} {projectDetails.Contact.lastName}</div>
-              <div>{projectDetails.Contact.email}</div>
-              <div>{projectDetails.Contact.phoneNumber}</div>
+              <div>{projectDetails.Contact?.firstName} {projectDetails.Contact?.lastName}</div>
+              <div>{projectDetails.Contact?.email}</div>
+              <div>{projectDetails.Contact?.phoneNumber}</div>
             </div>
           </section>
 
