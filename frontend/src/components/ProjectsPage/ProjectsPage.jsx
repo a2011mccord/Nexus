@@ -66,8 +66,8 @@ function ProjectsPage() {
           <h2>{projectDetails.name}</h2>
 
           <div className='project-actions'>
-            <FaEdit size={'1.4em'} className='action-icons' onClick={editProject} />
-            <FaTrash size={'1.2em'} className='action-icons' onClick={deleteProject} />
+            <FaEdit size={'1.4em'} className='action-icons' onClick={() => editProject(projectDetails)} />
+            <FaTrash size={'1.2em'} className='action-icons' onClick={() => deleteProject(projectDetails)} />
           </div>
 
           <section>
