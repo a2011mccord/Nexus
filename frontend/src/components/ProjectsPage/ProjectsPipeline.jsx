@@ -45,7 +45,7 @@ function ProjectsPipeline() {
         <div className='lead-pipe'>
           {projects && projects.map(project => {
             if (project.stage === 'Lead') return (
-              <div key={project.id} className='project-card' onClick={() => setProjectId(project.id)}>
+              <div key={project.id} className='project-card'>
                 <h4>{project.name}</h4>
                 <div className='project-card-info'>
                   <div>Rep: {project.Rep.firstName} {project.Rep.lastName}</div>
@@ -60,7 +60,7 @@ function ProjectsPipeline() {
         <div className='prospect-pipe'>
           {projects && projects.map(project => {
             if (project.stage === 'Prospect') return (
-              <div key={project.id} className='project-card' onClick={() => setProjectId(project.id)}>
+              <div key={project.id} className='project-card'>
                 <h4>{project.name}</h4>
                 <div className='project-card-info'>
                   <div>Rep: {project.Rep.firstName} {project.Rep.lastName}</div>
@@ -75,7 +75,7 @@ function ProjectsPipeline() {
         <div className='approved-pipe'>
           {projects && projects.map(project => {
             if (project.stage === 'Approved') return (
-              <div key={project.id} className='project-card' onClick={() => setProjectId(project.id)}>
+              <div key={project.id} className='project-card'>
                 <h4>{project.name}</h4>
                 <div className='project-card-info'>
                   <div>Rep: {project.Rep.firstName} {project.Rep.lastName}</div>
@@ -90,7 +90,7 @@ function ProjectsPipeline() {
         <div className='completed-pipe'>
           {projects && projects.map(project => {
             if (project.stage === 'Completed') return (
-              <div key={project.id} className='project-card' onClick={() => setProjectId(project.id)}>
+              <div key={project.id} className='project-card'>
                 <h4>{project.name}</h4>
                 <div className='project-card-info'>
                   <div>Rep: {project.Rep.firstName} {project.Rep.lastName}</div>
@@ -105,7 +105,7 @@ function ProjectsPipeline() {
         <div className='invoiced-pipe'>
           {projects && projects.map(project => {
             if (project.stage === 'Invoiced') return (
-              <div key={project.id} className='project-card' onClick={() => setProjectId(project.id)}>
+              <div key={project.id} className='project-card'>
                 <h4>{project.name}</h4>
                 <div className='project-card-info'>
                   <div>Rep: {project.Rep.firstName} {project.Rep.lastName}</div>
