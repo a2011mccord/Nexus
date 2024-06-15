@@ -30,7 +30,7 @@ function AddMemberModal() {
     <div className="form-cont">
       <h1>Add New Team Member</h1>
       <form onSubmit={handleSubmit}>
-        <label>Please enter a User's credentials
+        <label>Please enter a User&apos;s credentials
           <input
             type="text"
             placeholder="Username or Email"

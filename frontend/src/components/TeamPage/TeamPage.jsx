@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchTeam } from '../../store/teams';
 import { useModal } from '../../context/Modal';
 import OpenModalMenuItem from '../OpenModalMenuItem';
-import { CreateTeamModal } from './TeamModals';
+import { CreateTeamModal, DeleteTeamModal } from './TeamModals';
 import { AddMemberModal, DeleteMemberModal } from './MemberModals';
 import './TeamPage.css';
 import { FaEllipsisH } from "react-icons/fa";
@@ -31,6 +31,7 @@ function TeamPage() {
   };
 
   const addMember = () => setModalContent(<AddMemberModal />);
+  const deleteTeam = () => setModalContent(<DeleteTeamModal />);
 
   return (
     <>{currentTeam && currentTeam.message ?
@@ -102,6 +103,7 @@ function TeamPage() {
         <p>Your team currently has no members.</p>
       }
       <button onClick={addMember}>Add a Team Member</button>
+      <button onClick={deleteTeam}>Delete Team</button>
     </div>
     }</>
   )

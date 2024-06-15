@@ -10,10 +10,14 @@ module.exports = (sequelize, DataTypes) => {
         as: 'Owner'
       })
       this.hasMany(models.Manager, {
-        foreignKey: 'teamId'
+        foreignKey: 'teamId',
+        onDelete: 'CASCADE',
+        hooks: true
       })
       this.hasMany(models.Member, {
-        foreignKey: 'teamId'
+        foreignKey: 'teamId',
+        onDelete: 'CASCADE',
+        hooks: true
       })
       this.hasMany(models.Project, {
         foreignKey: 'teamId'

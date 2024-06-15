@@ -8,7 +8,7 @@ function DeleteMemberModal({ member, role }) {
 
   const handleDelete = e => {
     e.preventDefault();
-    console.log(member);
+
     if (role === 'member') {
       dispatch(deleteTeamMember(member.id));
     } else if (role === 'manager') {
