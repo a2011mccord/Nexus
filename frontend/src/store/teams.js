@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const LOAD_TEAM = 'teams/loadTeam';
 const ADD_TEAM = 'teams/addTeam';
 const ADD_TEAM_MEMBER = 'teams/addTeamMember';
+const UPDATE_TEAM_MEMBER = 'teams/updateTeamMember';
 const REMOVE_TEAM_MEMBER = 'teams/removeTeamMember';
 const REMOVE_TEAM_MANAGER = 'teams/removeTeamManager';
 const REMOVE_TEAM = 'teams/removeTeam';
@@ -19,6 +20,11 @@ const addTeam = team => ({
 
 const addTeamMember = team => ({
   type: ADD_TEAM_MEMBER,
+  team
+});
+
+const updateTeamMember = team => ({
+  type: UPDATE_TEAM_MEMBER,
   team
 });
 
@@ -71,6 +77,20 @@ export const createTeamMember = member => async dispatch => {
     return newTeam;
   }
 };
+
+export const editTeamMember = (memberId, payload) => async dispatch => {
+  const res = await csrfFetch(`/api/teams/members/${memberId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  if (res.ok) {
+    const newTeam = await res.json();
+    dispatch(updateTeamMember(newTeam));
+    return newTeam;
+  }
+}
 
 export const deleteTeamMember = memberId => async dispatch => {
   const res = await csrfFetch(`/api/teams/members/${memberId}`, {
@@ -127,6 +147,13 @@ const teamsReducer = (state = initialState, action) => {
       return newState;
     }
     case ADD_TEAM_MEMBER: {
+      const newState = { ...state, team: { ...state.team } };
+
+      newState.team = action.team;
+
+      return newState;
+    }
+    case UPDATE_TEAM_MEMBER: {
       const newState = { ...state, team: { ...state.team } };
 
       newState.team = action.team;

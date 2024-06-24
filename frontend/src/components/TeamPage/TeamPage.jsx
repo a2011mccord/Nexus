@@ -4,7 +4,7 @@ import { fetchTeam } from '../../store/teams';
 import { useModal } from '../../context/Modal';
 import OpenModalMenuItem from '../OpenModalMenuItem';
 import { CreateTeamModal, DeleteTeamModal } from './TeamModals';
-import { AddMemberModal, DeleteMemberModal } from './MemberModals';
+import { AddMemberModal, DeleteMemberModal, EditMemberModal } from './MemberModals';
 import './TeamPage.css';
 import { FaEllipsisH } from "react-icons/fa";
 
@@ -63,7 +63,10 @@ function TeamPage() {
                 <div className='user-actions' onClick={() => toggleActions(manager)}>
                   <FaEllipsisH size={'1.2em'} /></div>
                 <div id={`user-${manager.id}`} className='user-actions-dropdown hidden'>
-                  <div>Edit</div>
+                  <OpenModalMenuItem
+                    modalComponent={<EditMemberModal member={manager} currentRole='Manager' />}
+                    itemText='Edit'
+                  />
                   <OpenModalMenuItem
                     modalComponent={<DeleteMemberModal member={manager} role='manager' />}
                     itemText='Delete'
@@ -89,7 +92,10 @@ function TeamPage() {
                 <div className='user-actions' onClick={() => toggleActions(member)}>
                   <FaEllipsisH size={'1.2em'} /></div>
                 <div id={`user-${member.id}`} className='user-actions-dropdown hidden'>
-                  <div>Edit</div>
+                  <OpenModalMenuItem
+                    modalComponent={<EditMemberModal member={member} currentRole='Member' />}
+                    itemText='Edit'
+                  />
                   <OpenModalMenuItem
                     modalComponent={<DeleteMemberModal member={member} role="member" />}
                     itemText='Delete'

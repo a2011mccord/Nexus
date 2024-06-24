@@ -1,4 +1,5 @@
 import AddMemberModal from "./AddMemberModal";
 import DeleteMemberModal from "./DeleteMemberModal";
+import EditMemberModal from "./EditMemberModal";
 
-export { AddMemberModal, DeleteMemberModal };
+export { AddMemberModal, DeleteMemberModal, EditMemberModal };

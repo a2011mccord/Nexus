@@ -233,7 +233,119 @@ router.post('/', requireAuth, checkUserTeamExists, async (req, res, next) => {
   res.json(newTeamInfo);
 });
 
-router.put('/', requireAuth, async (req, res, next) => {
+router.put('/members/:memberId', requireAuth, authTeamOwner, async (req, res, next) => {
+  const { user } = req;
+  const { role } = req.body;
+  const memberId = req.params.memberId;
+  let team = await Team.findOne({
+    where: { ownerId: user.id },
+    include: [
+      { model: User, as: 'Owner' },
+      { model: Manager, include: [{ model: User }] },
+      { model: Member, include: [{ model: User }] }
+    ]
+  });
+  const member = await Member.findOne({ where: { userId: memberId } });
+  const manager = await Manager.findOne({ where: { userId: memberId } });
+
+  if (role === 'Member' && manager) {
+    const managerInfo = {
+      userId: manager.userId,
+      teamId: manager.teamId
+    }
+
+    manager.destroy();
+    const newMember = await Member.create(managerInfo);
+
+    const teamInfo = {
+      id: team.id,
+      name: team.name,
+      Owner: team.Owner,
+      Managers: [],
+      Members: []
+    };
+    team.Managers.forEach(manager => {
+      if (manager.userId !== managerInfo.userId) {
+        teamInfo.Managers.push(manager.User);
+      }
+    });
+    team.Members.forEach(member => {
+      teamInfo.Members.push(member.User);
+    });
+    const newMemberUser = await User.findByPk(newMember.userId);
+    teamInfo.Members.push(newMemberUser);
+
+    res.status(201);
+    res.json(teamInfo);
+  } else if (role === 'Member' && member) {
+    const teamInfo = {
+      id: team.id,
+      name: team.name,
+      Owner: team.Owner,
+      Managers: [],
+      Members: []
+    };
+    team.Managers.forEach(manager => {
+      teamInfo.Managers.push(manager.User);
+    });
+    team.Members.forEach(member => {
+      teamInfo.Members.push(member.User);
+    });
+
+    res.status(201);
+    res.json(teamInfo);
+  }
+
+  if (role === 'Manager' && member) {
+    const memberInfo = {
+      userId: member.userId,
+      teamId: member.teamId
+    };
+
+    member.destroy();
+    const newManager = await Manager.create(memberInfo);
+
+    const teamInfo = {
+      id: team.id,
+      name: team.name,
+      Owner: team.Owner,
+      Managers: [],
+      Members: []
+    };
+    team.Managers.forEach(manager => {
+      teamInfo.Managers.push(manager.User);
+    });
+    team.Members.forEach(member => {
+      if (member.userId !== memberInfo.userId) {
+        teamInfo.Members.push(member.User);
+      }
+    });
+    const newManagerUser = await User.findByPk(newManager.userId);
+    teamInfo.Managers.push(newManagerUser);
+
+    res.status(201);
+    res.json(teamInfo);
+  } else if (role === 'Manager' && manager) {
+    const teamInfo = {
+      id: team.id,
+      name: team.name,
+      Owner: team.Owner,
+      Managers: [],
+      Members: []
+    };
+    team.Managers.forEach(manager => {
+      teamInfo.Managers.push(manager.User);
+    });
+    team.Members.forEach(member => {
+      teamInfo.Members.push(member.User);
+    });
+
+    res.status(201);
+    res.json(teamInfo);
+  }
+});
+
+router.put('/:teamId', requireAuth, async (req, res, next) => {
 
 });
 
