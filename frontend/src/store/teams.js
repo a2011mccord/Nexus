@@ -3,10 +3,11 @@ import { csrfFetch } from './csrf';
 const LOAD_TEAM = 'teams/loadTeam';
 const ADD_TEAM = 'teams/addTeam';
 const ADD_TEAM_MEMBER = 'teams/addTeamMember';
+const UPDATE_TEAM = 'teams/updateTeam';
 const UPDATE_TEAM_MEMBER = 'teams/updateTeamMember';
+const REMOVE_TEAM = 'teams/removeTeam';
 const REMOVE_TEAM_MEMBER = 'teams/removeTeamMember';
 const REMOVE_TEAM_MANAGER = 'teams/removeTeamManager';
-const REMOVE_TEAM = 'teams/removeTeam';
 
 const loadTeam = team => ({
   type: LOAD_TEAM,
@@ -23,8 +24,18 @@ const addTeamMember = team => ({
   team
 });
 
+const updateTeam = team => ({
+  type: UPDATE_TEAM,
+  team
+});
+
 const updateTeamMember = team => ({
   type: UPDATE_TEAM_MEMBER,
+  team
+});
+
+const removeTeam = team => ({
+  type: REMOVE_TEAM,
   team
 });
 
@@ -36,11 +47,6 @@ const removeTeamMember = member => ({
 const removeTeamManager = manager => ({
   type: REMOVE_TEAM_MANAGER,
   manager
-});
-
-const removeTeam = team => ({
-  type: REMOVE_TEAM,
-  team
 });
 
 export const fetchTeam = () => async dispatch => {
@@ -78,6 +84,20 @@ export const createTeamMember = member => async dispatch => {
   }
 };
 
+export const editTeam = (teamId, payload) => async dispatch => {
+  const res = await csrfFetch(`/api/teams/${teamId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  if (res.ok) {
+    const newTeam = await res.json();
+    dispatch(updateTeam(newTeam));
+    return newTeam;
+  }
+};
+
 export const editTeamMember = (memberId, payload) => async dispatch => {
   const res = await csrfFetch(`/api/teams/members/${memberId}`, {
     method: 'PUT',
@@ -91,6 +111,18 @@ export const editTeamMember = (memberId, payload) => async dispatch => {
     return newTeam;
   }
 }
+
+export const deleteTeam = () => async dispatch => {
+  const res = await csrfFetch(`/api/teams`, {
+    method: 'DELETE'
+  });
+
+  if (res.ok) {
+    const removedTeam = await res.json();
+    dispatch(removeTeam(removedTeam));
+    return removedTeam;
+  }
+};
 
 export const deleteTeamMember = memberId => async dispatch => {
   const res = await csrfFetch(`/api/teams/members/${memberId}`, {
@@ -113,18 +145,6 @@ export const deleteTeamManager = managerId => async dispatch => {
     const removedManager = await res.json();
     dispatch(removeTeamManager(removedManager));
     return removedManager;
-  }
-};
-
-export const deleteTeam = () => async dispatch => {
-  const res = await csrfFetch(`/api/teams`, {
-    method: 'DELETE'
-  });
-
-  if (res.ok) {
-    const removedTeam = await res.json();
-    dispatch(removeTeam(removedTeam));
-    return removedTeam;
   }
 };
 
@@ -153,10 +173,24 @@ const teamsReducer = (state = initialState, action) => {
 
       return newState;
     }
+    case UPDATE_TEAM: {
+      const newState = { ...state, team: { ...state.team } };
+
+      newState.team.name = action.team.name;
+
+      return newState;
+    }
     case UPDATE_TEAM_MEMBER: {
       const newState = { ...state, team: { ...state.team } };
 
       newState.team = action.team;
+
+      return newState;
+    }
+    case REMOVE_TEAM: {
+      const newState = { ...state, team: { ...state.team } };
+
+      delete newState.team;
 
       return newState;
     }
@@ -171,13 +205,6 @@ const teamsReducer = (state = initialState, action) => {
       const newState = { ...state, team: { ...state.team } };
 
       delete newState.team.Managers[newState.team.Managers.indexOf(action.manager)]
-
-      return newState;
-    }
-    case REMOVE_TEAM: {
-      const newState = { ...state, team: { ...state.team } };
-
-      delete newState.team;
 
       return newState;
     }

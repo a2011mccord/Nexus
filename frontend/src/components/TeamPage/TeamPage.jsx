@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchTeam } from '../../store/teams';
 import { useModal } from '../../context/Modal';
 import OpenModalMenuItem from '../OpenModalMenuItem';
-import { CreateTeamModal, DeleteTeamModal } from './TeamModals';
+import { CreateTeamModal, DeleteTeamModal, EditTeamModal } from './TeamModals';
 import { AddMemberModal, DeleteMemberModal, EditMemberModal } from './MemberModals';
 import './TeamPage.css';
-import { FaEllipsisH } from "react-icons/fa";
+import { FaEllipsisH, FaEdit } from "react-icons/fa";
 
 function TeamPage() {
   const dispatch = useDispatch();
@@ -31,6 +31,7 @@ function TeamPage() {
   };
 
   const addMember = () => setModalContent(<AddMemberModal />);
+  const editTeam = () => setModalContent(<EditTeamModal team={currentTeam} />);
   const deleteTeam = () => setModalContent(<DeleteTeamModal />);
 
   return (
@@ -44,6 +45,12 @@ function TeamPage() {
     </div>
     :
     <div className='team-cont'>
+      <h3>Team/Company Name</h3>
+      <div>
+        <p>{currentTeam.name}</p>
+        <FaEdit size={'1.2em'} className='fa-edit' onClick={editTeam} />
+      </div>
+
       <h3>Owner</h3>
       <div>
         <p>Name: {currentTeam.Owner?.firstName} {currentTeam.Owner?.lastName}</p>

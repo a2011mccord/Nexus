@@ -345,8 +345,27 @@ router.put('/members/:memberId', requireAuth, authTeamOwner, async (req, res, ne
   }
 });
 
-router.put('/:teamId', requireAuth, async (req, res, next) => {
+router.put('/:teamId', requireAuth, authTeamOwner, async (req, res, next) => {
+  const team = await Team.findByPk(req.params.teamId);
+  const newTeamInfo = req.body;
 
+  const existingTeams = await Team.findAll();
+  existingTeams.forEach(team => {
+    const err = new Error('Team already exists');
+    err.errors = {};
+    if (team.id !== +req.params.teamId && team.name === newTeamInfo.name) {
+      err.errors.name = 'Team with that name already exists';
+    };
+
+    if (Object.keys(err.errors).length) {
+      next(err);
+    };
+  });
+
+  await team.update(newTeamInfo);
+
+  await team.save();
+  res.json(team);
 });
 
 router.delete('/members/:memberId', requireAuth, authTeamOwner, async (req, res, next) => {
