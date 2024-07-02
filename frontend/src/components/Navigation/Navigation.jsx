@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { fetchTeam } from '../../store/teams';
 import SettingsDropdown from './SettingsDropdown';
 import { useModal } from '../../context/Modal';
 import AboutModal from '../AboutModal';
@@ -16,9 +17,15 @@ import { SlCalender } from "react-icons/sl";
 import { IoMenu } from "react-icons/io5";
 
 function Navigation() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { setModalContent } = useModal();
   const sessionUser = useSelector(state => state.session.user);
+  const currentTeam = useSelector(state => state.teamState.team);
+
+  useEffect(() => {
+    dispatch(fetchTeam());
+  }, [dispatch]);
 
   useEffect(() => {
     switch (window.location.pathname) {
@@ -82,7 +89,7 @@ function Navigation() {
             }}
           /></div>
 
-          <div className='company-name'>{"[Company Name]"}</div>
+          <div className='company-name'>{currentTeam.name}</div>
 
           <div className='top-nav-right'>
             <div className='bell-icon' onClick={() => alert('Feature coming soon...')}>
@@ -90,7 +97,7 @@ function Navigation() {
             </div>
             <div className='profile-cont'>
               <span>{sessionUser.username}</span>
-              <SettingsDropdown user={sessionUser} />
+              <SettingsDropdown user={sessionUser}/>
             </div>
           </div>
         </div>

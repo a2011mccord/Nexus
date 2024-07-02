@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
-const { User, Contact, Project } = require('../db/models');
+const { User, Contact, Project, Team, Manager, Member } = require('../db/models');
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -94,4 +94,25 @@ const authorize = async (req, res, next) => {
   };
 };
 
-module.exports = { setTokenCookie, restoreUser, requireAuth, authorize };
+const authTeamOwner = async (req, res, next) => {
+  const { user } = req;
+  const team = await Team.findOne({ where: { ownerId: user.id } });
+
+  if (team) {
+    return next();
+  } else {
+    const err = new Error('Forbidden');
+    err.title = 'Authorization required';
+    err.errors = { message: 'You are not the owner of the team'}
+    err.status = 403;
+    return next(err);
+  }
+};
+
+module.exports = {
+  setTokenCookie,
+  restoreUser,
+  requireAuth,
+  authorize,
+  authTeamOwner
+};

@@ -4,6 +4,7 @@ const sessionRouter = require('./session');
 const usersRouter = require('./users');
 const contactsRouter = require('./contacts');
 const projectsRouter = require('./projects');
+const teamsRouter = require('./teams');
 
 router.use(restoreUser);
 
@@ -14,5 +15,7 @@ router.use('/users', usersRouter);
 router.use('/contacts', contactsRouter);
 
 router.use('/projects', projectsRouter);
+
+router.use('/teams', teamsRouter);
 
 module.exports = router;

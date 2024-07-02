@@ -11,6 +11,15 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Project, {
         foreignKey: 'repId'
       })
+      this.hasMany(models.Team, {
+        foreignKey: 'ownerId'
+      })
+      this.hasMany(models.Manager, {
+        foreignKey: 'userId'
+      })
+      this.hasMany(models.Member, {
+        foreignKey: 'userId'
+      })
     }
   }
 
@@ -63,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
     defaultScope: {
       attributes: {
-        exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt']
+        exclude: ['hashedPassword', 'createdAt', 'updatedAt']
       }
     }
   });

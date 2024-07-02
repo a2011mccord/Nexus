@@ -55,6 +55,51 @@ module.exports = {
         email: 'fake.contact2@gmail.com',
         phoneNumber: '222-222-2222',
         type: 'Lead'
+      },
+      {
+        userId: 4,
+        teamId: 1,
+        firstName: 'Fake',
+        lastName: 'Contact3',
+        email: 'fake.contact3@gmail.com',
+        phoneNumber: '333-333-3333',
+        type: 'Lead'
+      },
+      {
+        userId: 5,
+        teamId: 2,
+        firstName: 'Fake',
+        lastName: 'Contact4',
+        email: 'fake.contact4@gmail.com',
+        phoneNumber: '444-444-4444',
+        type: 'Lead'
+      },
+      {
+        userId: 6,
+        teamId: 2,
+        firstName: 'Fake',
+        lastName: 'Contact5',
+        email: 'fake.contact5@gmail.com',
+        phoneNumber: '555-555-5555',
+        type: 'Lead'
+      },
+      {
+        userId:7,
+        teamId: 2,
+        firstName: 'Fake',
+        lastName: 'Contact6',
+        email: 'fake.contact6@gmail.com',
+        phoneNumber: '666-666-6666',
+        type: 'Lead'
+      },
+      {
+        userId: 8,
+        teamId: 2,
+        firstName: 'Fake',
+        lastName: 'Contact7',
+        email: 'fake.contact7@gmail.com',
+        phoneNumber: '777-777-7777',
+        type: 'Lead'
       }
     ], { validate: true })
   },
@@ -68,7 +113,12 @@ module.exports = {
         'jane.doe@gmail.com',
         'john.johnson@gmail.com',
         'fake.contact1@gmail.com',
-        'fake.contact2@gmail.com'
+        'fake.contact2@gmail.com',
+        'fake.contact3@gmail.com',
+        'fake.contact4@gmail.com',
+        'fake.contact5@gmail.com',
+        'fake.contact6@gmail.com',
+        'fake.contact7@gmail.com'
       ] }
     }, {});
   }
