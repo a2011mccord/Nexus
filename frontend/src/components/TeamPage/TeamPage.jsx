@@ -47,7 +47,7 @@ function TeamPage() {
     <div className='team-cont'>
       <h3>Team/Company Name</h3>
       <div>
-        <p>{currentTeam.name}</p>
+        <p>{currentTeam?.name}</p>
         <FaEdit size={'1.2em'} className='fa-edit' onClick={editTeam} />
       </div>
 
@@ -61,10 +61,10 @@ function TeamPage() {
       <h3>Managers</h3>
       {currentTeam.Managers && currentTeam.Managers.length ?
         currentTeam.Managers.map(manager => (
-          <div key={manager.id}>
-            <p>Name: {manager.firstName} {manager.lastName}</p>
-            <p>Username: {manager.username}</p>
-            <p>Email: {manager.email}</p>
+          <div key={manager?.id}>
+            <p>Name: {manager?.firstName} {manager?.lastName}</p>
+            <p>Username: {manager?.username}</p>
+            <p>Email: {manager?.email}</p>
             {currentTeam && currentTeam.Owner.id === sessionUser.id &&
               <div className='user-actions-cont'>
                 <div className='user-actions' onClick={() => toggleActions(manager)}>
@@ -90,15 +90,15 @@ function TeamPage() {
       <h3>Members</h3>
       {currentTeam.Members && currentTeam.Members.length ?
         currentTeam.Members.map(member => (
-          <div key={member.id}>
-            <p>Name: {member.firstName} {member.lastName}</p>
-            <p>Username: {member.username}</p>
-            <p>Email: {member.email}</p>
+          <div key={member?.id}>
+            <p>Name: {member?.firstName} {member?.lastName}</p>
+            <p>Username: {member?.username}</p>
+            <p>Email: {member?.email}</p>
             {currentTeam && currentTeam.Owner.id === sessionUser.id &&
               <div className='user-actions-cont'>
                 <div className='user-actions' onClick={() => toggleActions(member)}>
                   <FaEllipsisH size={'1.2em'} /></div>
-                <div id={`user-${member.id}`} className='user-actions-dropdown hidden'>
+                <div id={`user-${member?.id}`} className='user-actions-dropdown hidden'>
                   <OpenModalMenuItem
                     modalComponent={<EditMemberModal member={member} currentRole='Member' />}
                     itemText='Edit'
