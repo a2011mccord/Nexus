@@ -9,6 +9,7 @@ import ContactsPage from "./components/ContactsPage";
 import ProjectsPage from "./components/ProjectsPage";
 import ProjectsPipeline from "./components/ProjectsPage/ProjectsPipeline";
 import ProjectsAnalysis from "./components/ProjectsPage/ProjectsAnalysis";
+import TeamPage from "./components/TeamPage";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: '/projects/analysis',
         element: <ProjectsAnalysis />
+      },
+      {
+        path: '/team',
+        element: <TeamPage />
       }
     ]
   }

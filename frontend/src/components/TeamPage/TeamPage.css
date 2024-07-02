@@ -1,0 +1,41 @@
+/* Team Page General */
+.hidden { display: none; }
+
+.team-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.team-cont > div {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.team-cont p {
+  margin: 0 0 10px 0;
+}
+
+.team-cont span {
+  cursor: pointer;
+}
+
+.user-actions-cont {
+  position: relative;
+}
+
+.user-actions {
+  cursor: pointer;
+  height: fit-content;
+}
+
+.user-actions-dropdown {
+  position: absolute;
+  top: 20px;
+  background-color: gray;
+  z-index: 1;
+}

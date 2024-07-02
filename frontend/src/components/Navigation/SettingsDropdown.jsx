@@ -53,6 +53,8 @@ function SettingsDropdown({ user }) {
         <h4>Hello, {user.firstName} {user.lastName}</h4>
         <p>{user.email}</p>
 
+        <button onClick={() => navigate('/team')}>Manage Team</button>
+
         <button onClick={logout}>Log Out</button>
       </div>
     </>

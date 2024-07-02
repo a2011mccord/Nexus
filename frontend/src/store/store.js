@@ -3,11 +3,13 @@ import { thunk } from 'redux-thunk';
 import sessionReducer from './session';
 import projectsReducer from './projects';
 import contactsReducer from './contacts';
+import teamsReducer from './teams';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   projectState: projectsReducer,
-  contactState: contactsReducer
+  contactState: contactsReducer,
+  teamState: teamsReducer
 });
 
 let enhancer;
