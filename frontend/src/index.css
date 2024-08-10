@@ -8,6 +8,7 @@ body {
 
 html {
   background-color: lightgray;
+  overflow-x: hidden;
 }
 
 :root {
@@ -27,6 +28,23 @@ html {
 
 .fa-plus {
   color: var(--project-stage-blue4);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+ background: lightgray;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-blue);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--background-blue);
 }
 
 /* tables */

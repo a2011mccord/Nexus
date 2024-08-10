@@ -10,6 +10,8 @@ import './ProjectsPage.css';
 import { FaSquarePlus } from 'react-icons/fa6';
 import { FaEdit, FaTrash } from "react-icons/fa";
 
+import { Scrollbar } from 'react-scrollbars-custom';
+
 function ProjectsPage() {
   const dispatch = useDispatch();
   const { setModalContent } = useModal();
