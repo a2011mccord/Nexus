@@ -31,6 +31,7 @@
   height: 100vh;
   overflow: scroll;
   overflow-x: hidden;
+  border-left: 4px solid var(--secondary-blue);
 }
 
 .project-card {
@@ -82,6 +83,7 @@
   background-color: white;
   width: 60%;
   height: 100vh;
+  margin-left: 25px;
 }
 
 .project-details-panel > section {
