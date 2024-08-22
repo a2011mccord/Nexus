@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { editProject, fetchProjects } from '../../store/projects';
+import { editProject, fetchProjectDetails, fetchProjects } from '../../store/projects';
 
 function EditProjectModal({ project, contacts }) {
   const dispatch = useDispatch();
@@ -53,12 +53,14 @@ function EditProjectModal({ project, contacts }) {
     return dispatch(editProject(project.id, editedProject))
       .then(closeModal)
       .then(() => dispatch(fetchProjects()))
+      .then(() => dispatch(fetchProjectDetails(project.id)))
       .catch(async res => {
         const data = await res.json();
         if (data) {
           setErrors(data.errors);
         }
       });
+
   };
 
   return (
